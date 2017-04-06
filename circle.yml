@@ -1,0 +1,9 @@
+machine:
+  hosts:
+    scoreable.test: 127.0.0.1
+    www.scoreable.test: 127.0.0.1
+dependencies:
+  cache_directories:
+    - "vendor"
+  pre:
+    - cp .env.testing .env
