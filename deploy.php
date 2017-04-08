@@ -1,11 +1,12 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
 
 // Configuration
 
-set('ssh_type', 'native');
+//set('ssh_type', 'native');
 //set('ssh_multiplexing', false);
 
 set('branch', 'master');
@@ -17,20 +18,11 @@ add('shared_dirs', []);
 add('writable_dirs', []);
 
 // Servers
-
-/*
- * task('upload:env', function () {
-    upload('.env.production', '{{deploy_path}}/shared/.env');
-})->desc('Environment setup');
- * server('production', 'libraryoftoys.com')
-    ->user('username')
-    ->identityFile('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa', 'pass phrase')
+server('production', 'libraryoftoys.com', 21098)
+    ->user('kandhlcj')
+    ->identityFileAndPassword('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa', 'Cougar08', 'uDgzyG5_HSQC!')
     ->set('deploy_path', '/home/kandhlcj/libraryoftoys.com')
     ->pty(true);
-*/
-
-localServer('local')
-    ->set('deploy_path', '~/test');
 
 // Tasks
 
