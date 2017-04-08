@@ -20,7 +20,7 @@ add('writable_dirs', []);
 // Servers
 server('production', 'libraryoftoys.com', 21098)
     ->user('kandhlcj')
-    ->identityFileAndPassword('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa', 'Cougar08', 'uDgzyG5_HSQC!')
+    ->identityFile('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa', 'Cougar08')
     ->set('deploy_path', '/home/kandhlcj/libraryoftoys.com')
     ->pty(true);
 
