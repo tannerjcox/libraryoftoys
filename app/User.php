@@ -37,19 +37,8 @@ class User extends Authenticatable
     ];
     protected $dateFormat = 'Y-m-d H:i:s';
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function sports()
+    public function isAdmin()
     {
-        return $this->belongsToMany('App\Sport');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function games()
-    {
-        return $this->hasMany('App\Game');
+        return $this->is_admin;
     }
 }

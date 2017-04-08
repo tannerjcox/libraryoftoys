@@ -5,3 +5,7 @@
 *.log
 composer.phar
 php.ini
+deploy.sh
+.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php

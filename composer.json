@@ -7,11 +7,13 @@
     "require": {
         "php": ">=5.6.4",
         "adamwathan/bootforms": "^0.8.4",
+        "doctrine/dbal": "^2.5",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.3",
         "deployer/deployer": "^4.3",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
@@ -43,6 +45,9 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:models -N",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },
