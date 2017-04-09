@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        /* Styles for just the home page*/
+    </style>
 </head>
 <body>
 <div class="flex-center position-ref full-height">

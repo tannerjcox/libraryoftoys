@@ -1,7 +1,7 @@
 @extends('layouts.account')
 
 @section('content')
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
         <tr>
             <th></th>

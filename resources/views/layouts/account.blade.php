@@ -11,7 +11,7 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @include('partials.styles')
 
     <!-- Scripts -->
     <script>
@@ -30,6 +30,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ mix('js/app.js') }}"></script>
+@include('partials.scripts')
 </body>
 </html>

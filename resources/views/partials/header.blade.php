@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default navbar-fixed-top col-xs-12">
     <div class="navbar-header">
 
@@ -35,6 +34,9 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
+                            <a href="{{ route('home') }}">
+                                My Account
+                            </a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
