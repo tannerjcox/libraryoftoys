@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@index')->name('front');
+Route::get('/{url}/page', 'PageController@page')->name('page');
 
 Auth::routes();
 
