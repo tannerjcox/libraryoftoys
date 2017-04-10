@@ -21,6 +21,14 @@
     <div class="links">
         <a href="">Coming Soon</a>
     </div>
+    <div>
+        <a href="{{ route('home') }}">
+            <img width="40%" src="{{ asset('images/boy-child-fun-beach.jpg') }}" alt="Boy playing at the beach">
+        </a>
+        <a href="{{ route('home') }}">
+            <img width="40%" src="{{ asset('images/tools.jpg') }}" alt="Tools">
+        </a>
+    </div>
 </div>
 @include('partials.scripts')
 
