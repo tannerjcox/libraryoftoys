@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ asset('images/toytrader2.ico') }}">
     <!-- Styles -->
     @include('partials.styles')
     <style>
@@ -12,19 +13,19 @@
     </style>
 </head>
 <body>
-@include('partials.header', ['home' => 1])
+@include('partials.header', ['admin' => 0])
 <div class="content main-content">
     <div class="title m-b-md">
-        {{ config('app.name') }}
+        <img src="{{ asset('images/toytrader_logo.png') }}"/>
     </div>
     <div class="links">
         <a href="">Coming Soon</a>
     </div>
     <div>
-        <a href="{{ route('home') }}">
+        <a href="">
             <img width="40%" src="{{ asset('images/boy-child-fun-beach.jpg') }}" alt="Boy playing at the beach">
         </a>
-        <a href="{{ route('home') }}">
+        <a href="">
             <img width="40%" src="{{ asset('images/tools.jpg') }}" alt="Tools">
         </a>
     </div>

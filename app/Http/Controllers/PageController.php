@@ -19,8 +19,12 @@ class PageController
 
     public function page($url)
     {
+        $page = Page::findByUrl($url);
+        if(!$page) {
+            return abort(404);
+        }
         return view('page.show')->with([
-            'page' => Page::findByUrl($url)
+            'page' => $page
         ]);
     }
 }

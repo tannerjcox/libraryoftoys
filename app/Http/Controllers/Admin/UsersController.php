@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreUserRequest;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 /**
  * Class UsersController
@@ -20,27 +19,69 @@ class UsersController
      */
     public function index()
     {
-        if(Auth::user()->isAdmin()) {
-            return view('admin.users.index')->with([
-                'users' => User::all()
-            ]);
-        } else {
-            return Redirect::route('home');
-        }
+        return view('admin.users.index')->with([
+            'users' => User::all()
+        ]);
     }
+
     /**
      * Show a list of users.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+    public function admins()
+    {
+        return view('admin.users.index')->with([
+            'users' => User::admins()
+        ]);
+    }
+
+    /**
+     * Edit a user.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('admin.users.edit');
+    }
+
+    /**
+     * Edit a user.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function store(StoreUserRequest $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->save();
+        return view('admin.users.edit')->with([
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Edit a user.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(User $user)
     {
-        if(Auth::user()->isAdmin() || $user->id == Auth::user()->id) {
-            return view('admin.users.edit')->with([
-                'user' => $user
-            ]);
-        } else {
-            return Redirect::route('home');
-        }
+        return view('admin.users.edit')->with([
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Edit a user.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function update(Request $request, User $user)
+    {
+        return view('admin.users.edit')->with([
+            'user' => $user
+        ]);
     }
 }

@@ -17,10 +17,20 @@ class CreatePagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('url');
-            $table->text('page_content');
+            $table->text('page_content')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
+        \App\Page::firstOrCreate([
+            'title' => 'About Us',
+            'url' => 'about-us'
+        ]);
+        \App\Page::firstOrCreate([
+            'title' => 'Why Toy Trader?',
+            'url' => 'why-toy-trader'
+        ]);
     }
+
 
     /**
      * Reverse the migrations.

@@ -1,41 +1,32 @@
 @extends('layouts.account')
 @section('title')
-    Static Pages
+    Toy Trader Admins
 @stop
-
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Static Pages</h3>
+            <h3 class="panel-title">Admins</h3>
         </div>
         <div class="panel-body">
             <table class="table table-hover table-striped">
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Title</th>
-                    <th>Url</th>
-                    <th>Created</th>
-                    <th>View</th>
+                    <th>User Name</th>
+                    <th>Member Since</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($pages as $page)
+                @foreach($users as $user)
                     <tr>
                         <td>
-                            {{ $page->id }}
+                            {{ $user->id }}
                         </td>
                         <td>
-                            {{ link_to_route('pages.edit', $page->title, $page->id) }}
+                            {{ link_to_route('users.edit', $user->name, $user->id) }}
                         </td>
                         <td>
-                            {{ $page->url }}
-                        </td>
-                        <td>
-                            {{ $page->created_at }}
-                        </td>
-                        <td>
-                            {{ link_to_route('page', 'View', $page->url) }}
+                            {{ $user->created_at }}
                         </td>
                     </tr>
                 @endforeach
@@ -43,7 +34,7 @@
             </table>
         </div>
         <div class="panel-footer text-right">
-            <a href="{{ route('pages.create') }}" class="btn btn-success">Create Page</a>
+            <a href="{{ route('users.create') }}" class="btn btn-success">Create User</a>
         </div>
     </div>
 @stop

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PageController@index')->name('front');
+Route::get('/', 'PageController@index')->name('home');
 Route::get('/{url}/page', 'PageController@page')->name('page');
 
 Auth::routes();
@@ -19,9 +19,10 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
 
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('dashboard');
 
     Route::group(['middleware' => 'admin'], function () {
+        Route::get('admins', 'UsersController@admins')->name('admins');
         Route::resource('users', 'UsersController');
         Route::resource('pages', 'PagesController');
     });
