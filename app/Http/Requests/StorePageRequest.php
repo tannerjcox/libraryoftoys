@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StorePageRequest extends FormRequest
+class StorePageRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StorePageRequest extends FormRequest
     public function rules()
     {
         return [
-            'url' => 'required|alpha_dash|unique:pages,url',
+            'url' => ['required', 'alpha_dash', Rule::unique('pages')->ignore($this->id)],
             'title' => 'required',
             'page_content' => 'required'
         ];

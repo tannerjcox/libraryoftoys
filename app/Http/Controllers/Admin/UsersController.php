@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreUserRequest;
 use App\User;
-use Illuminate\Http\Request;
 
 /**
  * Class UsersController
@@ -32,7 +31,7 @@ class UsersController
     public function admins()
     {
         return view('admin.users.index')->with([
-            'users' => User::admins()
+            'users' => User::admins()->get()
         ]);
     }
 
@@ -47,16 +46,21 @@ class UsersController
     }
 
     /**
-     * Edit a user.
+     * Store a user.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreUserRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->save();
-        return view('admin.users.edit')->with([
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'is_admin' => $request->is_admin
+        ]);
+
+        return \Redirect::route('users.edit', $user->id)->with([
             'user' => $user
         ]);
     }
@@ -76,11 +80,13 @@ class UsersController
     /**
      * Edit a user.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, User $user)
+    public function update(StoreUserRequest $request, User $user)
     {
-        return view('admin.users.edit')->with([
+        $user->update($request->all());
+
+        return \Redirect::route('users.edit', $user->id)->with([
             'user' => $user
         ]);
     }

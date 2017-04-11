@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_admin'
     ];
 
     /**
@@ -36,7 +36,6 @@ class User extends Authenticatable
     protected $dates = [
         'created_at', 'updated_at'
     ];
-    protected $dateFormat = 'Y-m-d H:i:s';
 
     public function isAdmin()
     {

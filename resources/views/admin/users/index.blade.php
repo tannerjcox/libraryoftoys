@@ -26,7 +26,7 @@
                             {{ link_to_route('users.edit', $user->name, $user->id) }}
                         </td>
                         <td>
-                            {{ $user->created_at }}
+                            {{ prettyDate($user->created_at) }}
                         </td>
                     </tr>
                 @endforeach

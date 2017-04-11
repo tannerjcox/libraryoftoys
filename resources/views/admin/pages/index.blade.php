@@ -15,8 +15,8 @@
                     <th></th>
                     <th>Title</th>
                     <th>Url</th>
+                    <th>Link</th>
                     <th>Created</th>
-                    <th>View</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,10 +32,10 @@
                             {{ $page->url }}
                         </td>
                         <td>
-                            {{ $page->created_at }}
+                            {{ link_to_route('page', 'View', $page->url) }}
                         </td>
                         <td>
-                            {{ link_to_route('page', 'View', $page->url) }}
+                            {{ prettyDate($page->created_at) }}
                         </td>
                     </tr>
                 @endforeach
