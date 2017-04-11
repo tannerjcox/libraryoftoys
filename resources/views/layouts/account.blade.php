@@ -25,11 +25,13 @@
 <div class="col-md-10 col-md-offset-1">
     @include('partials.sidebar')
     <div class="main-content col-md-9">
+        @include('partials.validation')
         @yield('content')
     </div>
 </div>
 
 <!-- Scripts -->
 @include('partials.scripts')
+@yield('scripts')
 </body>
 </html>

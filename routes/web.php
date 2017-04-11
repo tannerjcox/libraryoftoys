@@ -16,5 +16,14 @@ Route::get('/{url}/page', 'PageController@page')->name('page');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('users', 'UsersController');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+
+    Route::get('/', 'HomeController@index')->name('home');
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('users', 'UsersController');
+        Route::resource('pages', 'PagesController');
+    });
+
+});

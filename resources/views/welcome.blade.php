@@ -17,7 +17,6 @@
     <div class="title m-b-md">
         {{ config('app.name') }}
     </div>
-
     <div class="links">
         <a href="">Coming Soon</a>
     </div>
@@ -31,6 +30,5 @@
     </div>
 </div>
 @include('partials.scripts')
-
 </body>
 </html>

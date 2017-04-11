@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Http\Request;
 
 class PageController
@@ -18,6 +19,8 @@ class PageController
 
     public function page($url)
     {
-        
+        return view('page.show')->with([
+            'page' => Page::findByUrl($url)
+        ]);
     }
 }

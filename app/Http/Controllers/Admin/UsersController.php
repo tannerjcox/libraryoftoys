@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
  * Class UsersController
  * @package App\Http\Controllers
  */
-class UsersController extends Controller
+class UsersController
 {
     /**
      * Show a list of users.
@@ -21,7 +21,7 @@ class UsersController extends Controller
     public function index()
     {
         if(Auth::user()->isAdmin()) {
-            return view('users.index')->with([
+            return view('admin.users.index')->with([
                 'users' => User::all()
             ]);
         } else {
@@ -36,7 +36,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         if(Auth::user()->isAdmin() || $user->id == Auth::user()->id) {
-            return view('users.edit')->with([
+            return view('admin.users.edit')->with([
                 'user' => $user
             ]);
         } else {

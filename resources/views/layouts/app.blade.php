@@ -21,8 +21,8 @@
     </script>
 </head>
 <body>
-<div id="app">
-    @include('partials.header')
+@include('partials.header')
+<div id="app" class="main-content">
     @yield('content')
 </div>
 
