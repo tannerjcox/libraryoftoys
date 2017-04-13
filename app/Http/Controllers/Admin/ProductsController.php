@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BaseRequest;
-use App\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductsController extends Controller
@@ -26,11 +28,13 @@ class ProductsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        return view('admin.products.edit');
+        return view('admin.products.edit')->with([
+            'user' => User::find(Input::get('user_id'))
+        ]);
     }
 
     /**
@@ -42,6 +46,10 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = Product::create($request->all());
+        if(!$product->user_id){
+            $product->user_id = Auth::user()->id;
+            $product->save();
+        }
 
         return Redirect::route('products.edit', $product->id)->with([
             'success' => true,

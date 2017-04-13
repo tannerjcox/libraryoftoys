@@ -25,6 +25,21 @@ class UsersController extends Controller
     }
 
     /**
+     * Show a list of user products.
+     *
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function products($id)
+    {
+        $user = User::find($id);
+
+        return view('admin.users.products')->with([
+            'user' => $user
+        ]);
+    }
+
+    /**
      * Show a list of users.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

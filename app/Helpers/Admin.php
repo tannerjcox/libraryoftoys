@@ -1,10 +1,10 @@
 <?php
 
 if (!function_exists('active_link_to_route')) {
-    function active_link_to_route($url, $title, $parameters = [], $attributes = [], $conditions = null)
+    function active_link_to_route($name, $title, $parameters = [], $attributes = [], $conditions = null)
     {
         $active = false;
-        if (Route::currentRouteName() == $url) {
+        if (Route::currentRouteName() == $name) {
             $active = true;
         }
 
@@ -18,7 +18,7 @@ if (!function_exists('active_link_to_route')) {
                 }
             }
         }
-        return '<li' . ($active == true ? ' class="active"' : '') . '>' . link_to_route($url, $title, $parameters, $attributes) . '</li>';
+        return '<li' . ($active == true ? ' class="active"' : '') . '>' . link_to_route($name, $title, $parameters, $attributes) . '</li>';
     }
 }
 

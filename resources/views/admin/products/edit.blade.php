@@ -46,5 +46,6 @@
             {!! BootForm::submit()->class('btn btn-success text-right') !!}
         </div>
     </div>
+    {!! BootForm::hidden('user_id')->value(isset($user) ? $user->id : 0) !!}
     {!! BootForm::close() !!}
 @stop

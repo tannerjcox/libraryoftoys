@@ -1,10 +1,9 @@
 /node_modules/
 /vendor/
 /.idea/
+/storage/
 .env
-*.log
 composer.phar
-php.ini
 deploy.sh
 .phpstorm.meta.php
 _ide_helper.php
