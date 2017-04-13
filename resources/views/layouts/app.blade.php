@@ -8,8 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
-
+    <title>{{ config('app.name') }} - @yield('title')</title>
+    <link rel="shortcut icon" href="{{ asset('images/toytrader.ico') }}">
     <!-- Styles -->
     @include('partials.styles')
 
@@ -21,8 +21,8 @@
     </script>
 </head>
 <body>
-<div id="app">
-    @include('partials.header')
+@include('partials.header', ['admin' => 0])
+<div id="app" class="main-content">
     @yield('content')
 </div>
 

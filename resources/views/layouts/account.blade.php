@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title', config('app.name'))</title>
+    <link rel="shortcut icon" href="{{ asset('images/toytrader.ico') }}">
 
     <!-- Styles -->
     @include('partials.styles')
@@ -25,11 +26,13 @@
 <div class="col-md-10 col-md-offset-1">
     @include('partials.sidebar')
     <div class="main-content col-md-9">
+        @include('partials.validation')
         @yield('content')
     </div>
 </div>
 
 <!-- Scripts -->
 @include('partials.scripts')
+@yield('scripts')
 </body>
 </html>

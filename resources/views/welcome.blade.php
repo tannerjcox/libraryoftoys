@@ -5,34 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ asset('images/toytrader2.ico') }}">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    @include('partials.styles')
     <style>
         /* Styles for just the home page*/
     </style>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ url('/login') }}">Login</a>
-                <a href="{{ url('/register') }}">Register</a>
-            @endif
-        </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            {{ config('app.name') }}
-        </div>
-
-        <div class="links">
-            <a href="">Coming Soon</a>
-        </div>
+@include('partials.header', ['admin' => 0])
+<div class="content main-content">
+    <div class="title m-b-md">
+        <img src="{{ asset('images/toytrader_logo.png') }}"/>
+    </div>
+    <div class="links">
+        <a href="">Coming Soon</a>
+    </div>
+    <div>
+        <a href="">
+            <img width="40%" src="{{ asset('images/boy-child-fun-beach.jpg') }}" alt="Boy playing at the beach">
+        </a>
+        <a href="">
+            <img width="40%" src="{{ asset('images/tools.jpg') }}" alt="Tools">
+        </a>
     </div>
 </div>
+@include('partials.scripts')
 </body>
 </html>
