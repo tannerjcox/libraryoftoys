@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePageRequest;
 use App\Page;
 use Illuminate\Support\Facades\Redirect;
 
-class PagesController
+class PagesController extends Controller
 {
     public function index()
     {

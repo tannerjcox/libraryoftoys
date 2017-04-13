@@ -36,3 +36,14 @@ if (!function_exists('prettyDate')) {
         return '';
     }
 }
+
+if (!function_exists('formatMoney')) {
+    function formatMoney($price, $decimals = 2)
+    {
+
+        if ($price) {
+            return '$' . number_format((double) $price, $decimals);
+        }
+        return '';
+    }
+}

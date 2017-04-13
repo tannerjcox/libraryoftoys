@@ -16,7 +16,7 @@ class Admin
     public function handle($request, Closure $next)
     {
         if(!\Auth::user()->isAdmin()) {
-            return redirect('admin');
+            return redirect('dashboard');
         }
         return $next($request);
     }

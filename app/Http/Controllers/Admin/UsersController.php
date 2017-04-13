@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\User;
 
@@ -9,7 +10,7 @@ use App\User;
  * Class UsersController
  * @package App\Http\Controllers
  */
-class UsersController
+class UsersController extends Controller
 {
     /**
      * Show a list of users.
