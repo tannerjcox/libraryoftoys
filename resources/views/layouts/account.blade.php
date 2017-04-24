@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     @include('partials.styles')
+    @yield('styles')
 
     <!-- Scripts -->
     <script>
@@ -23,9 +24,9 @@
 </head>
 <body>
 @include('partials.header')
-<div class="col-md-10 col-md-offset-1">
+<div class="col-lg-10 col-lg-offset-1">
     @include('partials.sidebar')
-    <div class="main-content col-md-9">
+    <div class="main-content col-sm-9">
         @include('partials.validation')
         @yield('content')
     </div>

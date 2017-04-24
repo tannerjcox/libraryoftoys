@@ -20,9 +20,7 @@ Route::group([
     Route::get('admins', 'UsersController@admins')->name('admins');
     Route::get('users/{id}/products', 'UsersController@products')->name('users.products');
     Route::resource('users', 'UsersController');
-
     Route::resource('pages', 'PagesController');
-
     Route::resource('products', 'ProductsController');
 });
 
@@ -43,7 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'Controller@index')->name('dashboard');
 });
 
+Route::post('/upload-images', 'ImagesController@upload')->name('images.store');
 //Vendor Routes
-//Route::group(['namespace' => 'Vendor', 'middleware' => 'auth'], function () {
-//    Route::get('/', 'HomeController@index')->name('dashboard');
-//});
+Route::group([
+    'namespace' => 'Vendor',
+    'middleware' => 'auth'
+], function () {
+    Route::resource('vendor-products', 'ProductsController');
+});

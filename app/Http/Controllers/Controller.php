@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    private $currentUser;
 
     /**
      * Create a new controller instance.

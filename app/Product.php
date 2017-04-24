@@ -25,6 +25,11 @@ class Product extends BaseModel
 
     public function getUrlAttribute()
     {
-        return str_slug($this->name);
+        return str_slug($this->name . ' ' . $this->id);
+    }
+
+    public function getFullUrlAttribute()
+    {
+        return env('APP_URL') . str_slug($this->name . ' ' . $this->id);
     }
 }

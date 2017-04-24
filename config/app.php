@@ -170,6 +170,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         AdamWathan\BootForms\BootFormsServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,8 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'BootForm' => AdamWathan\BootForms\Facades\BootForm::class
-
+        'BootForm' => AdamWathan\BootForms\Facades\BootForm::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
-
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -19,8 +19,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index')->with([
-            'products' => Product::paginate(1)
+        $products = Auth::user()->products();
+        return view('vendor.products.index')->with([
+            'products' => $products->paginate(1)
         ]);
     }
 
@@ -29,9 +30,9 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.products.edit')->with([
+        return view('vendor.products.edit')->with([
             'user' => User::find(Input::get('user_id'))
         ]);
     }
@@ -44,13 +45,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+
         $product = Product::create($request->all());
         if(!$product->user_id){
             $product->user_id = Auth::user()->id;
             $product->save();
         }
 
-        return Redirect::route('products.edit', $product->id)->with([
+        return Redirect::route('vendor.products.edit', $product->id)->with([
             'success' => true,
             'message' => 'Product successfully created!'
         ]);

@@ -39,7 +39,7 @@
             </table>
         </div>
         <div class="panel-footer text-right">
-            <a href="{{ route('products.create') }}" class="btn btn-primary">Create Product</a>
+            <a href="{{ route('vendor-products.create') }}" class="btn btn-primary">Create Product</a>
         </div>
     </div>
     {{ $products->links() }}

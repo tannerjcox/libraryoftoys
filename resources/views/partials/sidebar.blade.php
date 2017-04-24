@@ -1,4 +1,4 @@
-<aside class="main-sidebar col-md-2">
+<aside class="main-sidebar col-sm-2">
     <ul class="nav nav-pills nav-stacked">
         {!! active_link_to_route('dashboard', 'Dashboard') !!}
         @if(Auth::user()->isAdmin())
@@ -6,5 +6,6 @@
             {!! active_link_to_route('pages.index', 'Pages') !!}
             {!! active_link_to_route('products.index', 'Products') !!}
         @endif
+        {!! active_link_to_route('vendor-products.index', 'My Products') !!}
     </ul>
 </aside>

@@ -62,9 +62,6 @@
     <div class="panel panel-default">
         <div class="panel-heading">Dashboard - Welcome {{ Auth::user()->name }}</div>
         <div class="panel-body">
-            {{--There have been {{ $newUsers }} accounts created in the last 14 days.--}}
-            {{--            There have been {{ $newProducts }} products created in the last 14 days.--}}
-
             <canvas id="myChart" width="400" height="200"></canvas>
         </div>
     </div>
