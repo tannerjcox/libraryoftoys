@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\User;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -19,8 +20,15 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        if($user->isAdmin()) {
+            $products = Product::paginate(20);
+        } else {
+            $products = $user->products()->paginate(20);
+        }
         return view('admin.products.index')->with([
-            'products' => Product::paginate(1)
+            'products' => $products,
+            'admin' => $user->isAdmin()
         ]);
     }
 
@@ -48,6 +56,19 @@ class ProductsController extends Controller
         if(!$product->user_id){
             $product->user_id = Auth::user()->id;
             $product->save();
+        }
+        if($request->images) {
+            $imageNames = explode(',', $request->images);
+            $order = 0;
+            foreach ($imageNames as $imageName) {
+                $path = '/uploads/' . $imageName;
+                $image = new Image($imageName);
+                $image->path = $path;
+                $image->name = $imageName;
+                $image->order = $order;
+                $product->images()->save($image);
+                $order++;
+            }
         }
 
         return Redirect::route('products.edit', $product->id)->with([
@@ -89,9 +110,20 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-
         $product->update($request->all());
-
+        if($request->images) {
+            $imageNames = explode(',', $request->images);
+            $order = 0;
+            foreach ($imageNames as $imageName) {
+                $path = '/uploads/' . $imageName;
+                $image = new Image($imageName);
+                $image->path = $path;
+                $image->name = $imageName;
+                $image->order = $order;
+                $product->images()->save($image);
+                $order++;
+            }
+        }
         return Redirect::route('products.edit', $product->id)->with([
             'success' => true,
             'message' => 'Product successfully updated!'

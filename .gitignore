@@ -2,6 +2,7 @@
 /vendor/
 /.idea/
 /storage/
+/public/uploads/
 .env
 composer.phar
 deploy.sh

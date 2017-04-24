@@ -1,14 +1,29 @@
 @extends('layouts.account')
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
     <script>
       $(function () {
         $('[name=title]').keyup(function () {
-          var title = $(this).val();
-          $('[name=url]').val(title.replace(/ /g, '-'));
-        });
-      });
+          var title = $(this).val()
+          $('[name=url]').val(title.replace(/ /g, '-'))
+        })
+      })
+
+      Dropzone.autoDiscover = false
+      var myDZ = new Dropzone('form.dropzone')
+      myDZ.on('complete', function (file) {
+        path = JSON.parse(file.xhr.response).path
+        if ($('[name=images]').val() !== '') {
+          $('[name=images]').val($('[name=images]').val() + ',' + path)
+        } else {
+          $('[name=images]').val(path)
+        }
+      })
     </script>
+@stop
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
 @stop
 @section('content')
     @if(isset($product))
@@ -40,12 +55,20 @@
                     {!! BootForm::text('Price', 'price') !!}
                 </div>
             </div>
-            {!! BootForm::textarea('Description', 'description')->defaultValue(isset($product) ? $product->page_content : '') !!}
+            {!! BootForm::textarea('Description', 'description')->rows(5)->defaultValue(isset($product) ? $product->page_content : '') !!}
         </div>
         <div class="panel-footer text-right">
+            {!! BootForm::hidden('images')->value('') !!}
             {!! BootForm::submit()->class('btn btn-success text-right') !!}
         </div>
     </div>
-    {!! BootForm::hidden('user_id')->value(isset($user) ? $user->id : 0) !!}
+    {!! BootForm::close() !!}
+
+    @if(isset($product))
+        @foreach($product->images()->get() as $image)
+            <img src="{{ $image->url }}" height="150">
+        @endforeach
+    @endif
+    {!! BootForm::open()->post()->action(route('images.store'))->class('dropzone') !!}
     {!! BootForm::close() !!}
 @stop

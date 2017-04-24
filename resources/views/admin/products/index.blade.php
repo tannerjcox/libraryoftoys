@@ -25,10 +25,10 @@
                             {{ $product->id }}
                         </td>
                         <td>
-                            {{ link_to_route('products.edit', $product->title, $product->id) }}
+                            {{ link_to_route('products.edit', $product->name, $product->id) }}
                         </td>
                         <td>
-                            <a href="/{{ $product->url }}?preview=1" target="_blank">View</a>
+                            {!! $product->previewLink !!}
                         </td>
                         <td>
                             {{ prettyDate($product->created_at) }}

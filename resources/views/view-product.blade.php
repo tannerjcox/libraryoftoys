@@ -6,7 +6,9 @@
     <div class="col-md-10 col-md-offset-1">
         @if($preview)
             <div class="row">
-                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">This is a preview only, this product may or may not be purchasable</div>
+                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">This is a preview only, this
+                    product may or may not be purchasable
+                </div>
             </div>
         @endif
         @if(Auth::user() && Auth::user()->isAdmin())
@@ -16,6 +18,10 @@
             {{ $product->name }}:
             {{ formatMoney($product->price) }}
         </h1>
+        {!! $product->mainThumbnail !!}
+        @foreach($product->images()->get() as $image)
+            <img src="{{ $image->url }}" height="150">
+        @endforeach
         {{ $product->description }}
     </div>
 @stop

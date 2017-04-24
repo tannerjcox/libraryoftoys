@@ -32,4 +32,23 @@ class Product extends BaseModel
     {
         return env('APP_URL') . str_slug($this->name . ' ' . $this->id);
     }
+
+    public function getMainThumbnailAttribute()
+    {
+        $dimension = Image::THUMBNAIL_SQUARE;
+        if(!$this->images()->count()) {
+            return '';
+        }
+        return "<img src={$this->images()->first()->url} width='{$dimension}'>";
+    }
+
+    public function images()
+    {
+        return $this->morphMany('App\Image', 'imageable')->orderBy('order', 'asc');
+    }
+
+    public function getPreviewLinkAttribute()
+    {
+        return "<a href=''/{$this->url}?preview=1' target='_blank'>View</a>";
+    }
 }
