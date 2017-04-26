@@ -7,7 +7,6 @@ use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use App\User;
 use App\Image;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;

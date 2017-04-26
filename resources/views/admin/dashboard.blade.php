@@ -5,6 +5,7 @@
     <script>
       var newUsers = {!! $newUsers !!},
         newProducts = {!! $newProducts !!},
+        dates = {!! $dates !!},
         ctx = $("#myChart"),
         data = {
           type: 'line',
@@ -15,11 +16,11 @@
                 label: 'New Users',
                 data: newUsers,
                 backgroundColor: "rgba(30,99,255,0.2)",
-                borderColor: "rgba(30,99,255,1)",
-                pointBackgroundColor: "rgba(179,181,198,1)",
+                borderColor: "rgba(30,99,255,0.7)",
+                pointBackgroundColor: "rgba(30,99,255,1)",
                 pointBorderColor: "#fff",
                 pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgba(179,181,198,1)",
+                pointHoverBorderColor: "rgba(30,99,255,1)",
                 lineTension:0
               },
               {
@@ -31,6 +32,17 @@
                 pointBorderColor: "#fff",
                 pointHoverBackgroundColor: "#fff",
                 pointHoverBorderColor: "rgba(255,99,132,1)",
+                lineTension:0
+              },
+              {
+                label: '',
+                data: dates,
+                backgroundColor: "rgba(255,99,132,0)",
+                borderColor: "rgba(255,99,132,0)",
+                pointBackgroundColor: "rgba(255,99,132,0)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgba(255,99,132,0)",
                 lineTension:0
               }
             ]
@@ -52,8 +64,6 @@
             }
           }
         };
-
-      console.log(typeof dataArray);
 
       var myLineChart = new Chart(ctx, data)
     </script>
