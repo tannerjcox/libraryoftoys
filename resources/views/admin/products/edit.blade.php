@@ -64,11 +64,17 @@
     </div>
     {!! BootForm::close() !!}
 
-    @if(isset($product))
-        @foreach($product->images()->get() as $image)
-            <img src="{{ $image->url }}" height="150">
-        @endforeach
-    @endif
-    {!! BootForm::open()->post()->action(route('images.store'))->class('dropzone') !!}
+    {!! BootForm::open()->post()->action(route('images.store'))->class('dropzone col-md-6')->style("height:300px") !!}
     {!! BootForm::close() !!}
+    @if(isset($product))
+        @if($product->images()->count())
+            <div class="col-md-6">
+                @include('partials.product-gallery')
+            </div>
+        @else
+            <div>
+                No images
+            </div>
+        @endif
+    @endif
 @stop

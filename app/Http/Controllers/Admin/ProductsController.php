@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use App\User;
 use App\Image;
@@ -21,7 +22,7 @@ class ProductsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if($user->isAdmin()) {
+        if ($user->isAdmin()) {
             $products = Product::paginate(20);
         } else {
             $products = $user->products()->paginate(20);
@@ -47,28 +48,19 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $product = Product::create($request->all());
-        if(!$product->user_id){
+        if (!$product->user_id) {
             $product->user_id = Auth::user()->id;
             $product->save();
         }
-        if($request->images) {
+        if ($request->images) {
             $imageNames = explode(',', $request->images);
-            $order = 0;
-            foreach ($imageNames as $imageName) {
-                $path = '/uploads/' . $imageName;
-                $image = new Image($imageName);
-                $image->path = $path;
-                $image->name = $imageName;
-                $image->order = $order;
-                $product->images()->save($image);
-                $order++;
-            }
+            $this->storeImages($imageNames, $product);
         }
 
         return Redirect::route('products.edit', $product->id)->with([
@@ -80,7 +72,7 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -91,7 +83,7 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -104,36 +96,52 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProductRequest $request, Product $product)
     {
         $product->update($request->all());
-        if($request->images) {
+        if ($request->images) {
             $imageNames = explode(',', $request->images);
-            $order = 0;
-            foreach ($imageNames as $imageName) {
-                $path = '/uploads/' . $imageName;
-                $image = new Image($imageName);
-                $image->path = $path;
-                $image->name = $imageName;
-                $image->order = $order;
-                $product->images()->save($image);
-                $order++;
-            }
+            $this->storeImages($imageNames, $product);
         }
+
         return Redirect::route('products.edit', $product->id)->with([
             'success' => true,
             'message' => 'Product successfully updated!'
         ]);
     }
 
+    private function storeImages(array $imageNames, Product $product)
+    {
+        $order = $product->images->count() ? max($product->images()->pluck('order')->toArray()) + 1 : 0;
+        foreach ($imageNames as $key => $imageName) {
+            $extension = \File::extension(public_path("/uploads/{$imageName}"));
+            $newName = "{$product->url}-{$order}.{$extension}";
+            $img = \Intervention\Image\Facades\Image::make(public_path("/uploads/{$imageName}"));
+            $img->save(public_path("images/products/{$newName}"));
+            $img->resize(null, Image::THUMBNAIL_HEIGHT, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path("images/products/thumbs/{$newName}"));
+
+            $path = '/images/products/';
+            $image = new Image($newName);
+            $image->path = $path;
+            $image->name = $newName;
+            $image->order = $order;
+            $product->images()->save($image);
+            $order++;
+
+            \File::delete(public_path("/uploads/{$imageName}"));
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)

@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('images/toytrader.ico') }}">
     <!-- Styles -->
     @include('partials.styles')
+    @yield('styles')
 
     <!-- Scripts -->
     <script>
@@ -28,5 +29,6 @@
 
 <!-- Scripts -->
 @include('partials.scripts')
+@yield('scripts')
 </body>
 </html>

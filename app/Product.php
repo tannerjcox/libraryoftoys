@@ -35,7 +35,7 @@ class Product extends BaseModel
 
     public function getMainThumbnailAttribute()
     {
-        $dimension = Image::THUMBNAIL_SQUARE;
+        $dimension = Image::THUMBNAIL_WIDTH;
         if(!$this->images()->count()) {
             return '';
         }
@@ -49,6 +49,6 @@ class Product extends BaseModel
 
     public function getPreviewLinkAttribute()
     {
-        return "<a href=''/{$this->url}?preview=1' target='_blank'>View</a>";
+        return "<a href='/{$this->url}?preview=1' target='_blank'>View</a>";
     }
 }

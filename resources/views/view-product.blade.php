@@ -2,26 +2,40 @@
 @section('title')
     {{ $product->name }}
 @stop
+@section('scripts')
+    <script>
+      $(function () {
+
+      })
+    </script>
+@stop
 @section('content')
     <div class="col-md-10 col-md-offset-1">
-        @if($preview)
+        @if($preview && !$product->is_enabled)
             <div class="row">
                 <div class="alert alert-danger text-center col-md-6 col-md-offset-3">This is a preview only, this
-                    product may or may not be purchasable
+                    product is not purchasable
                 </div>
             </div>
         @endif
-        @if(Auth::user() && Auth::user()->isAdmin())
+        @if(Auth::user() && (Auth::user()->isAdmin() || Auth::user()->id == $product->user_id))
             <a href="{{ route('products.edit', $product->id) }}">Edit Product</a>
         @endif
         <h1 class="text-center">
             {{ $product->name }}:
             {{ formatMoney($product->price) }}
         </h1>
-        {!! $product->mainThumbnail !!}
-        @foreach($product->images()->get() as $image)
-            <img src="{{ $image->url }}" height="150">
-        @endforeach
-        {{ $product->description }}
+        <div class="col-md-6">
+            @if($product->images()->count())
+                @include('partials.product-gallery')
+            @else
+                <div>
+                    Images Coming Soon
+                </div>
+            @endif
+        </div>
+        <div class="col-md-6">
+            {!! $product->description !!}
+        </div>
     </div>
 @stop
