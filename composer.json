@@ -8,9 +8,11 @@
         "php": ">=5.6.4",
         "adamwathan/bootforms": "^0.8.4",
         "doctrine/dbal": "^2.5",
+        "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4"
+        "laravelcollective/html": "^5.4",
+        "venturecraft/revisionable": "^1.28"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.3",

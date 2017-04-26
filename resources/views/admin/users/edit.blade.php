@@ -36,6 +36,12 @@
             <div class="col-xs-6">
                 {!! BootForm::checkbox('Is Admin', 'is_admin') !!}
             </div>
+            @if($user->products )
+                <div class="col-xs-6">
+                    {!! link_to_route('users.products', $user->name . '\'s Products', $user->id) !!}
+                </div>
+            @endif
+
         </div>
         <div class="panel-footer text-right">
             {!! BootForm::submit()->class('btn btn-success text-right') !!}

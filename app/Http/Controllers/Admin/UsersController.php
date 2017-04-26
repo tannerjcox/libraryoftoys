@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\User;
 
@@ -9,7 +10,7 @@ use App\User;
  * Class UsersController
  * @package App\Http\Controllers
  */
-class UsersController
+class UsersController extends Controller
 {
     /**
      * Show a list of users.
@@ -20,6 +21,21 @@ class UsersController
     {
         return view('admin.users.index')->with([
             'users' => User::all()
+        ]);
+    }
+
+    /**
+     * Show a list of user products.
+     *
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function products($id)
+    {
+        $user = User::find($id);
+
+        return view('admin.users.products')->with([
+            'user' => $user
         ]);
     }
 
