@@ -51,9 +51,21 @@
                 <div class="col-md-6">
                     {!! BootForm::text('Name', 'name') !!}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     {!! BootForm::text('Price', 'price') !!}
                 </div>
+                <div class="col-md-3">
+                    {!! BootForm::label('Is Enabled')->class('control-label') !!}
+                    {!! BootForm::radio('Yes', 'is_enabled', 1)->attribute(old('is_enabled') || (isset($product) && $product->is_enabled) ? 'checked' : '', true) !!}
+                    {!! BootForm::radio('No', 'is_enabled', 0)->attribute(!old('is_enabled') || (isset($product) && !$product->is_enabled) ? 'checked' : '', true) !!}
+                </div>
+                @if(Auth::user()->isAdmin())
+                    <div class="col-md-3">
+                        {!! BootForm::label('Is Approved')->class('control-label') !!}
+                        {!! BootForm::radio('Yes', 'is_approved', 1)->attribute(old('is_approved') || (isset($product) && $product->is_enabled) ? 'checked' : '', true) !!}
+                        {!! BootForm::radio('No', 'is_approved', 0)->attribute(!old('is_approved') || (isset($product) && !$product->is_enabled) ? 'checked' : '', true) !!}
+                    </div>
+                @endif
             </div>
             {!! BootForm::textarea('Description', 'description')->rows(5)->defaultValue(isset($product) ? $product->page_content : '') !!}
         </div>

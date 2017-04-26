@@ -19,10 +19,11 @@ class CreateProductsTable extends Migration
             $table->mediumInteger('user_id')->unsigned()->default(0);
             $table->tinyInteger('quantity')->unsigned()->default(1);
             $table->string('name');
-            $table->float('price');
+            $table->float('price')->nullable();
             $table->text('description')->nullable();
             $table->string('status')->nullable();
             $table->boolean('is_enabled')->default(false);
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
