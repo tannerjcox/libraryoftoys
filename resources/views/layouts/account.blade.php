@@ -31,6 +31,7 @@
         @yield('content')
     </div>
 </div>
+@include('partials.footer')
 
 <!-- Scripts -->
 @include('partials.scripts')

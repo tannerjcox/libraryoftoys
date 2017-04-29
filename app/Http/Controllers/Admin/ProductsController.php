@@ -87,6 +87,12 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
+        if(!Auth::user()->isAdmin() && Auth::user()->id != $product->user_id) {
+            Redirect::route('admin.products.index')->with([
+                'message' => 'You don\'t have permission to edit this product',
+                'success' => false
+                ])
+        }
         return view('admin.products.edit', [
             'product' => $product
         ]);

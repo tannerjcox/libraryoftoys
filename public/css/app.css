@@ -56,8 +56,20 @@ body {
   margin-bottom: 30px;
 }
 
+.m-t-md {
+  margin-top: 30px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
 .main-sidebar, .main-content {
   padding-top: 65px;
   min-height: 100%;
   z-index: 810;
+}
+
+.footer-container {
+  background: lightgray;
 }

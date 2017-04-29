@@ -26,7 +26,7 @@
 <div id="app" class="main-content">
     @yield('content')
 </div>
-
+@include('partials.footer')
 <!-- Scripts -->
 @include('partials.scripts')
 @yield('scripts')

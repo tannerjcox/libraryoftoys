@@ -2,13 +2,6 @@
 @section('title')
     {{ $product->name }}
 @stop
-@section('scripts')
-    <script>
-      $(function () {
-
-      })
-    </script>
-@stop
 @section('content')
     <div class="col-md-10 col-md-offset-1">
         @if($preview && !$product->is_enabled)

@@ -13,7 +13,7 @@ class Image extends BaseModel
         'created_at', 'updated_at'
     ];
     protected $filename;
-    CONST THUMBNAIL_HEIGHT = 250;
+    CONST THUMBNAIL_HEIGHT = 200;
 
     public function __construct($fileName = null)
     {

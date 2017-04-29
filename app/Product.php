@@ -35,11 +35,11 @@ class Product extends BaseModel
 
     public function getMainThumbnailAttribute()
     {
-        $dimension = Image::THUMBNAIL_WIDTH;
+        $dimension = Image::THUMBNAIL_HEIGHT;
         if(!$this->images()->count()) {
             return '';
         }
-        return "<img src={$this->images()->first()->url} width='{$dimension}'>";
+        return "<img src={$this->images()->first()->url} height='{$dimension}'>";
     }
 
     public function images()
