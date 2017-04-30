@@ -91,7 +91,7 @@ class ProductsController extends Controller
             Redirect::route('admin.products.index')->with([
                 'message' => 'You don\'t have permission to edit this product',
                 'success' => false
-                ])
+                ]);
         }
         return view('admin.products.edit', [
             'product' => $product
