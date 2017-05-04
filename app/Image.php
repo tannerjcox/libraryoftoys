@@ -13,7 +13,8 @@ class Image extends BaseModel
         'created_at', 'updated_at'
     ];
     protected $filename;
-    CONST THUMBNAIL_HEIGHT = 200;
+    CONST THUMBNAIL_HEIGHT = 300;
+    CONST MEDIUM_HEIGHT = 750;
 
     public function __construct($fileName = null)
     {
@@ -25,14 +26,14 @@ class Image extends BaseModel
         return $this->morphTo();
     }
 
-    public function scopeThumbnails($query)
-    {
-        return $query->where('path', 'LIKE', '%thumbs%');
-    }
-
     public function getThumbnailUrlAttribute()
     {
         return $this->path . 'thumbs/' . $this->name;
+    }
+
+    public function getMediumUrlAttribute()
+    {
+        return $this->path . 'medium/' . $this->name;
     }
 
     public function getUrlAttribute()

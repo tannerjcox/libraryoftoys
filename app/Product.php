@@ -4,6 +4,7 @@ namespace App;
 
 class Product extends BaseModel
 {
+    CONST SMALL_THUMBNAIL_HEIGHT = 75;
     protected $fillable = [
         'name', 'description', 'status', 'is_enabled', 'price', 'user_id'
     ];
@@ -36,7 +37,16 @@ class Product extends BaseModel
     public function getMainThumbnailAttribute()
     {
         $dimension = Image::THUMBNAIL_HEIGHT;
-        if(!$this->images()->count()) {
+        if (!$this->images()->count()) {
+            return '';
+        }
+        return "<img src={$this->images()->first()->url} height='{$dimension}'>";
+    }
+
+    public function getSmallThumbnailAttribute()
+    {
+        $dimension = static::SMALL_THUMBNAIL_HEIGHT;
+        if (!$this->images()->count()) {
             return '';
         }
         return "<img src={$this->images()->first()->url} height='{$dimension}'>";
@@ -50,5 +60,15 @@ class Product extends BaseModel
     public function getPreviewLinkAttribute()
     {
         return "<a href='/{$this->url}?preview=1' target='_blank'>View</a>";
+    }
+
+    public function getQtyOptionsArrayAttribute()
+    {
+        $options = [];
+
+        for ($i = 0; $i <= $this->quantity; $i++) {
+            $options[] = $i;
+        }
+        return $options;
     }
 }

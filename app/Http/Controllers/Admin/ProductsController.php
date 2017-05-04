@@ -130,6 +130,9 @@ class ProductsController extends Controller
             $img->resize(null, Image::THUMBNAIL_HEIGHT, function ($constraint) {
                 $constraint->aspectRatio();
             })->save(public_path("images/products/thumbs/{$newName}"));
+            $img->resize(null, Image::MEDIUM_HEIGHT, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path("images/products/medium/{$newName}"));
 
             $path = '/images/products/';
             $image = new Image($newName);
