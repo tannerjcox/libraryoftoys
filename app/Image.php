@@ -17,7 +17,6 @@ class Image extends BaseModel
 
     public function __construct($fileName = null)
     {
-        parent::__construct();
         $this->filename = $fileName;
     }
 

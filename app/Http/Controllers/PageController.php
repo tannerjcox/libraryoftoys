@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Page;
 use App\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Str;
 
 class PageController
 {
