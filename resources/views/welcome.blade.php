@@ -19,10 +19,10 @@
         <img src="{{ asset('images/toytrader_logo.png') }}" class="col-md-4 col-xs-12">
     </div>
     <div class=" col-sm-10 col-sm-offset-1">
-        <a href="" class="col-md-6">
+        <a href="{{ route('browse') }}" class="col-md-6">
             <img src="{{ asset('images/boy-child-fun-beach.jpg') }}" class="col-xs-12 m-b-10" alt="Boy playing at the beach">
         </a>
-        <a href="" class="col-md-6 m-b-10">
+        <a href="{{ route('browse') }}" class="col-md-6 m-b-10">
             <img src="{{ asset('images/tools.jpg') }}" class="col-xs-12 m-b-10" alt="Tools">
         </a>
     </div>
