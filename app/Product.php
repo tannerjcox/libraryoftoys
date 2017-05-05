@@ -6,7 +6,7 @@ class Product extends BaseModel
 {
     CONST SMALL_THUMBNAIL_HEIGHT = 75;
     protected $fillable = [
-        'name', 'description', 'status', 'is_enabled', 'price', 'user_id'
+        'name', 'description', 'status', 'is_enabled', 'is_approved', 'price', 'user_id'
     ];
 
     public function user()

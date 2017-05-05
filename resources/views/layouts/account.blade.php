@@ -24,9 +24,9 @@
 </head>
 <body>
 @include('partials.header')
-<div class="col-lg-10 col-lg-offset-1">
+<div class="col-lg-12">
     @include('partials.sidebar')
-    <div class="main-content col-sm-9">
+    <div class="main-content col-sm-10">
         @include('partials.validation')
         @yield('content')
     </div>

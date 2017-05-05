@@ -13,9 +13,9 @@
         $('#myCarousel').find('.item').each(function () {
           $(this).zoom({
             url: $(this).data('image')
-          });
-        });
-      });
+          })
+        })
+      })
     </script>
 @stop
 @section('styles')
@@ -42,8 +42,8 @@
     <div class="col-xs-12">
         @if($preview && !$product->is_enabled)
             <div class="row">
-                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">This is a preview only, this
-                    product is not purchasable
+                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">
+                    This is a preview only, this product is not purchasable
                 </div>
             </div>
         @endif
@@ -75,7 +75,6 @@
                 @endif
             </div>
             <div class="clearfix">
-                {!! $product->stockMessage !!}
                 {!! $product->description !!}
             </div>
         </div>
