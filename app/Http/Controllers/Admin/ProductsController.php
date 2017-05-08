@@ -87,6 +87,12 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
+        if(!Auth::user()->isAdmin() && Auth::user()->id != $product->user_id) {
+            Redirect::route('admin.products.index')->with([
+                'message' => 'You don\'t have permission to edit this product',
+                'success' => false
+                ]);
+        }
         return view('admin.products.edit', [
             'product' => $product
         ]);
@@ -124,6 +130,9 @@ class ProductsController extends Controller
             $img->resize(null, Image::THUMBNAIL_HEIGHT, function ($constraint) {
                 $constraint->aspectRatio();
             })->save(public_path("images/products/thumbs/{$newName}"));
+            $img->resize(null, Image::MEDIUM_HEIGHT, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path("images/products/medium/{$newName}"));
 
             $path = '/images/products/';
             $image = new Image($newName);

@@ -51,6 +51,6 @@ class Controller extends BaseController
             ]);
         }
 
-        return view('vendor.dashboard');
+        return view('vendors.dashboard');
     }
 }

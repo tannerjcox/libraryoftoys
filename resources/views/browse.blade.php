@@ -11,9 +11,13 @@
             We're sorry, there are no products currently available
         @endif
         @foreach($products as $product)
-            {{ $product->name }}<br>
-            {{ formatMoney($product->price) }}<br>
-            {{ $product->description }}
+            <div class="text-center col-xs-6 col-sm-4 col-md-3 col-lg-2 browse-product">
+                <a href="{{ $product->url }}">
+                    {!! $product->mainThumbnail !!}<br>
+                    {{ $product->name }}<br>
+                </a>
+                {{ formatMoney($product->renderedPrice) }}<br>
+            </div>
         @endforeach
     </div>
 @stop

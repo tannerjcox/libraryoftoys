@@ -1,63 +1,108 @@
 html,
 body {
-  background-color: #fff;
-  color: #636b6f;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 100;
-  height: 100vh;
-  margin: 0;
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 100;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
 }
 
 .full-height {
-  height: 100vh;
+    height: 100vh;
 }
 
 .flex-center {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .position-ref {
-  position: relative;
+    position: relative;
 }
 
 .top-right {
-  position: absolute;
-  right: 10px;
-  top: 18px;
+    position: absolute;
+    right: 10px;
+    top: 18px;
 }
 
 .content {
-  text-align: center;
+    text-align: center;
 }
 
 .title {
-  font-size: 84px;
+    font-size: 84px;
 }
 
 .links > a {
-  color: #636b6f;
-  padding: 0 25px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .1rem;
-  text-decoration: none;
-  text-transform: uppercase;
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .m-b-md {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.m-t-md {
+    margin-top: 30px;
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
 }
 
 .main-sidebar, .main-content {
-  padding-top: 65px;
-  min-height: 100%;
-  z-index: 810;
+    padding-top: 65px;
+    min-height: 100%;
+    z-index: 810;
+}
+
+/* footer */
+footer {
+    margin-top: 30px;
+    padding-top: 30px;
+    background-color: #303030;
+    border-top: 1px solid #ddd;
+    color: #e2e2e2;
+}
+
+footer hr {
+    border-top: none;
+    border-bottom: 1px solid #666;
+}
+
+footer a {
+    color: #ccc;
+    text-decoration: none !important;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+footer h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.browse-product img {
+    max-width: 100%;
+    height: auto;
 }
