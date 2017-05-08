@@ -24,6 +24,9 @@
                         {!! link_to_route('page', 'Contact Us', ['url' => 'about-us']) !!}
                     </li>
                     <li>
+                        {!! link_to_route('page', 'Contact a Supplier', ['url' => 'about-us']) !!}
+                    </li>
+                    <li>
                         {!! link_to_route('page', 'F.A.Q.', ['url' => 'about-us']) !!}
                     </li>
                 </ul>
