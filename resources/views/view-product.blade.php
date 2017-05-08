@@ -27,7 +27,8 @@
         }
 
         .main-image {
-            max-height: 350px;
+            height: 350px!important;
+            max-width:100%;
         }
 
         @media (max-width: 768px) {
@@ -67,7 +68,7 @@
                 Price: {{ formatMoney($product->price) }}
             </h3>
             <div class="col-xs-6 col-md-3 pull-right">
-                @if($product->isAvailable())
+                @if($product->isAvailable() || $preview)
                     {!! BootForm::open()->get()->action('\add-to-cart') !!}
                     {!! BootForm::select('Quantity', 'quantity', $product->qtyOptionsArray)->select(1) !!}
                     {!! BootForm::button('Add to Cart')->type('submit')->class('btn btn-primary') !!}

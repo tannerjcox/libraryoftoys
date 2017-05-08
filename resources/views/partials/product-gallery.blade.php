@@ -9,10 +9,10 @@
         @endforeach
     </div>
 </div>
-<div class="col-sm-3 col-sm-pull-9">
+<div class="col-sm-3 col-sm-pull-9 col-xs-12">
     <ul class="list-unstyled text-center ">
         @foreach($product->images()->get() as $image)
-            <li style="padding:5px" class="col-xs-3 col-sm-12">
+            <li style="padding:5px" class="col-xs-4 col-sm-12">
                 <a id="carousel-selector-{{ $loop->index }}" class="{{ $loop->first ? 'selected' : '' }} carousel-selector-link">
                     <img src="{{ $image->thumbnailUrl }}" style="border:1px solid black;">
                 </a>
