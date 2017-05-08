@@ -40,7 +40,12 @@ class Product extends BaseModel
         if (!$this->images()->count()) {
             return '';
         }
-        return "<img src={$this->images()->first()->thumbnailUrl} height='{$dimension}'>";
+        return "<img src={$this->images()->first()->thumbnailUrl}>";
+    }
+
+    public function getRenderedPriceAttribute()
+    {
+        return $this->price;
     }
 
     public function getSmallThumbnailAttribute()

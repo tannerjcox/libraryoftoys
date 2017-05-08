@@ -101,3 +101,8 @@ footer h5 {
     font-weight: bold;
     color: #fff;
 }
+
+.browse-product img {
+    max-width: 100%;
+    height: auto;
+}

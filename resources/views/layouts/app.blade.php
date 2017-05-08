@@ -23,7 +23,7 @@
 </head>
 <body>
 @include('partials.header', ['admin' => 0])
-<div id="app" class="main-content">
+<div id="app" class="main-content row">
     @yield('content')
 </div>
 @include('partials.footer')

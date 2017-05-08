@@ -12,23 +12,25 @@
     <link rel="shortcut icon" href="{{ asset('images/toytrader.ico') }}">
 
     <!-- Styles -->
-    @include('partials.styles')
-    @yield('styles')
+@include('partials.styles')
+@yield('styles')
 
-    <!-- Scripts -->
+<!-- Scripts -->
     <script>
-        window.Laravel = {!! json_encode([
+      window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-        ]) !!};
+        ]) !!}
     </script>
 </head>
 <body>
 @include('partials.header')
-<div class="col-lg-12">
-    @include('partials.sidebar')
-    <div class="main-content col-sm-10">
-        @include('partials.validation')
-        @yield('content')
+<div class="row">
+    <div class="col-lg-12">
+        @include('partials.sidebar')
+        <div class="main-content col-sm-10">
+            @include('partials.validation')
+            @yield('content')
+        </div>
     </div>
 </div>
 @include('partials.footer')
