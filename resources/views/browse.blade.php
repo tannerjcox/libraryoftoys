@@ -3,7 +3,7 @@
     Browse Products
 @stop
 @section('content')
-    <div class="col-md-10 col-md-offset-1 text-center">
+    <div class="text-center">
         <h1>
             Browse Products
         </h1>

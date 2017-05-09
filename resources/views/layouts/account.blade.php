@@ -24,13 +24,11 @@
 </head>
 <body>
 @include('partials.header')
-<div class="row">
-    <div class="col-lg-12">
-        @include('partials.sidebar')
-        <div class="main-content col-sm-10">
-            @include('partials.validation')
-            @yield('content')
-        </div>
+<div class="container-fluid">
+    @include('partials.sidebar')
+    <div class="main-content col-sm-10">
+        @include('partials.validation')
+        @yield('content')
     </div>
 </div>
 @include('partials.footer')
