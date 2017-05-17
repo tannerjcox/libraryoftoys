@@ -1,6 +1,6 @@
 @if(!Auth::user())
     <h4>Please Log In to leave a review</h4>
-@elseif(Auth::user()->hasRevxiewedProduct($product->id))
+@elseif(Auth::user()->hasReviewedProduct($product->id))
     <h4>Thank you for your review!</h4>
 @else
     <h4>Leave a Review</h4>
