@@ -18,4 +18,5 @@ $(function () {
       $('[id=carousel-selector-' + id + ']').addClass('selected')
     })
   }
+  $('[data-toggle="tooltip"]').tooltip();
 })

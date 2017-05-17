@@ -41,6 +41,7 @@ Route::any('{name}-{id}', ['as' => 'product.show', 'uses' => 'PageController@pro
     ->where('id', '([0-9]+)$');
 Route::get('browse', 'PageController@browse')->name('browse');
 
+Route::post('/review', 'Admin\ReviewsController@store')->name('review.store');
 //Auth Routes
 Auth::routes();
 

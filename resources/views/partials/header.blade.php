@@ -14,12 +14,20 @@
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
             @if(isset($admin) && !$admin)
-                {!! active_link_to_route('page', 'About Us', ['url' => 'about-us']) !!}
-                {!! active_link_to_route('page', 'Why Toy Trader', ['url' => 'why-toy-trader']) !!}
+                <li>
+                    {!! link_to_route('page', 'About Us', ['url' => 'about-us']) !!}
+                </li>
+                <li>
+                    {!! link_to_route('page', 'Why Toy Trader', ['url' => 'why-toy-trader']) !!}
+                </li>
             @endif
             @if (Auth::guest())
-                {!! active_link_to_route('login', 'Login') !!}
-                {!! active_link_to_route('register', 'Register') !!}
+                <li>
+                    {!! link_to_route('login', 'Login') !!}
+                </li>
+                <li>
+                    {!! link_to_route('register', 'Register') !!}
+                </li>
             @else
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -30,10 +38,10 @@
                             <a href="{{ route('dashboard') }}">
                                 My Account
                             </a>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault() document.getElementById('logout-form').submit()">
                                 Logout
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>

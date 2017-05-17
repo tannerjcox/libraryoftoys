@@ -27,8 +27,8 @@
         }
 
         .main-image {
-            height: 350px!important;
-            max-width:100%;
+            height: 350px !important;
+            max-width: 100%;
         }
 
         @media (max-width: 768px) {
@@ -61,22 +61,41 @@
             @endif
         </div>
         <div class="col-md-6 col-xs-12">
-            <h1 class="text-center">
-                {{ $product->name }}
-            </h1>
-            <h3>
-                Price: {{ formatMoney($product->price) }}
-            </h3>
-            <div class="col-xs-6 col-md-3 pull-right">
-                @if($product->isAvailable() || $preview)
-                    {!! BootForm::open()->get()->action('\add-to-cart') !!}
-                    {!! BootForm::select('Quantity', 'quantity', $product->qtyOptionsArray)->select(1) !!}
-                    {!! BootForm::button('Add to Cart')->type('submit')->class('btn btn-primary') !!}
-                    {!! BootForm::close() !!}
-                @endif
+            <div class="row">
+                <div class="col-md-8">
+                    <h6>
+                        {{ $product->supplierName }}
+                        {{--                {!! $product->user->renderRating !!}--}}
+                    </h6>
+                    <h3>
+                        {{ $product->name }}
+                    </h3>
+                    <h4>
+                        {!! $product->renderRating !!}
+                        {!! $product->reviews->count() !!} customer reviews
+                    </h4>
+                    <hr>
+                    <h4 class="pull-left">
+                        {{ formatMoney($product->price) }}
+                    </h4>
+                </div>
+
+                <div class="col-md-4 pull-right">
+                    @if($product->isAvailable() || $preview)
+                        {!! BootForm::open()->get()->action('\add-to-cart') !!}
+                        {!! BootForm::button('Add to Cart')->type('submit')->class('btn btn-primary') !!}
+                        {!! BootForm::close() !!}
+                    @endif
+                </div>
             </div>
-            <div class="clearfix">
+            <div class="clearfix"></div>
+            <div class="product-description">
+                <h4>Details</h4>
                 {!! $product->description !!}
+            </div>
+            @include('reviews.show', ['reviewable' => $product])
+            <div>
+                @include('reviews.create')
             </div>
         </div>
     </div>
