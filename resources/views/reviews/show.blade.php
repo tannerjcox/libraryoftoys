@@ -5,7 +5,7 @@
             {!! $review->renderRating() !!}
             {!! $review->title !!}
         </h4>
-        By {!! $review->user->firstName . ' on ' . $review->created_at .' ' . $review->user->id !!} <br>
+        By {!! $review->user->firstName . ' on ' . $review->created_at !!} <br>
         @if($review->user->verifiedInteraction($reviewable))
             Verified Renter
         @endif
