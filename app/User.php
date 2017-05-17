@@ -43,12 +43,22 @@ class User extends Authenticatable
         return $this->hasMany('App\Product');
     }
 
-    public function rentedProducts()
+    public function reviews()
     {
-        return $this->hasManyThrough('App\Product','App\ProductReservation', 'product_id', 'user_id', 'id');
+        return $this->hasMany('App\Review');
     }
 
-    public function reviews()
+    public function productReservations()
+    {
+        return $this->hasMany('App\ProductReservation');
+    }
+
+    public function rentedProducts()
+    {
+        return Product::whereIn('id', $this->productReservations()->pluck('product_id'));
+    }
+
+    public function reviewed()
     {
         return $this->morphMany('App\Review', 'reviewable');
     }
@@ -83,12 +93,17 @@ class User extends Authenticatable
 
     public function hasRentedFrom(User $user)
     {
-        return $this->reservations()->where('user_id', $user->id);
+        return $this->reservations()->where('user_id', $user->id)->first();
     }
 
     public function hasRented(Product $product)
     {
-        return $this->rentedProducts->where('id', $product->id);
+        return $this->rentedProducts()->where('products.id', $product->id)->first();
+    }
+
+    public function hasReviewedProduct($id)
+    {
+        return $this->reviews()->where('reviewable_id', $id)->where('reviewable_type', 'App\Product')->count();
     }
 
     public function isAdmin()

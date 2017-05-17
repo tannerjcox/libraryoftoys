@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use App\Review;
-use App\User;
 use App\Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -39,15 +38,10 @@ class ReviewsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(Request $request)
     {
         $product = Product::find(Input::get('product_id'));
-
-        $review = new Review();
-        $review->user_id = Auth::user()->id;
-        $review->title = Input::get('title');
-        $review->description = Input::get('description');
-        $review->rating = 0;
+        $review = Review::create($request->all());
         $product->reviews()->save($review);
 
         return redirect($product->full_url)->with([

@@ -89,13 +89,29 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <div class="product-description">
-                <h4>Details</h4>
-                {!! $product->description !!}
-            </div>
-            @include('reviews.show', ['reviewable' => $product])
             <div>
-                @include('reviews.create')
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active product-description" id="description">
+                        {!! $product->description !!}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="reviews">
+                        @include('reviews.show', ['reviewable' => $product])
+                        <div>
+                            @include('reviews.create')
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-description">
             </div>
         </div>
     </div>
