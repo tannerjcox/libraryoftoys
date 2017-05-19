@@ -46,7 +46,7 @@ class Product extends BaseModel
 
     public function isAvailable()
     {
-        return $this->is_enabled;
+        return $this->is_enabled && $this->is_approved;
     }
 
     public function scopeAvailable($query)

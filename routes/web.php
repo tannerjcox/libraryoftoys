@@ -50,4 +50,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'Controller@index')->name('dashboard');
 });
 
-Route::post('/upload-images', 'ImagesController@upload')->name('images.store');
+Route::post('/upload-images', 'ImagesController@upload')->name('images.upload');
+Route::resource('images', 'ImagesController');

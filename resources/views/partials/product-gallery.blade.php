@@ -3,8 +3,7 @@
     <div class="carousel-inner" role="listbox">
         @foreach($product->images()->get() as $image)
             <div class="item {{ $loop->first ? 'active' : '' }} text-center" data-image="{{ $image->url }}">
-                <img src="{{ $image->mediumUrl }}" alt="{{ $product->name }}"
-                     style="width:auto;margin:auto" class="main-image">
+                <img src="{{ $image->mediumUrl }}" alt="{{ $product->name }}" style="width:auto;margin:auto" class="main-image">
             </div>
         @endforeach
     </div>
@@ -16,6 +15,11 @@
                 <a id="carousel-selector-{{ $loop->index }}" class="{{ $loop->first ? 'selected' : '' }} carousel-selector-link">
                     <img src="{{ $image->thumbnailUrl }}" style="border:1px solid black;">
                 </a>
+                @if(Auth::user() && Auth::user()->isAdmin())
+                    <button type="button" class="btn btn-link" data-delete-image="{{ $image->id }}">
+                        <i class="fa-close fa" style="margin-top:-10px;"></i>
+                    </button>
+                @endif
             </li>
         @endforeach
     </ul>

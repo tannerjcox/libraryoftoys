@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top col-xs-12">
+<nav class="navbar navbar-default col-xs-12">
     <div class="navbar-header">
         <!-- Collapsed Hamburger -->
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
