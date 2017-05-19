@@ -11,26 +11,6 @@
         $('.carousel-selector-link').hover(function () {
           $(this).click()
         });
-
-        $('[data-delete-image]').click(function() {
-          _fa = $(this).find('i');
-          _this = $(this);
-          id = $(this).data('delete-image');
-          if (confirm('Are you sure?')) {
-            _fa.removeClass('fa-close').addClass('fa-spinner fa-spin')
-            $.ajax({
-              url: '/images/' + id,
-              type: 'DELETE',
-              data: {
-                '_token': '{{ csrf_token() }}'
-              }
-            }).done(function (response) {
-              if (response.success) {
-                _this.parent().fadeOut();
-              }
-            })
-          }
-        })
       });
 
       Dropzone.autoDiscover = false

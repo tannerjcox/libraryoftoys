@@ -1,4 +1,10 @@
 $(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
   if ($('#myCarousel').length) {
     // handles the carousel thumbnails
     $('[id^=carousel-selector-]').click(function () {
@@ -19,4 +25,21 @@ $(function () {
     })
   }
   $('[data-toggle="tooltip"]').tooltip();
+
+  $('[data-delete-image]').click(function() {
+    _fa = $(this).find('i');
+    _this = $(this);
+    id = $(this).data('delete-image');
+    if (confirm('Are you sure?')) {
+      _fa.removeClass('fa-close').addClass('fa-spinner fa-spin')
+      $.ajax({
+        url: '/images/' + id,
+        type: 'DELETE'
+      }).done(function (response) {
+        if (response.success) {
+          _this.parent().fadeOut();
+        }
+      })
+    }
+  });
 })
