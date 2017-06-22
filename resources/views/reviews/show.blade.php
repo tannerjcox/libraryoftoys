@@ -1,10 +1,10 @@
-<h4>Customer Reviews</h4>
+<h5>Customer Reviews</h5>
 @if($reviewable->reviews->count())
     @foreach($reviewable->reviews()->orderBy('created_at', 'desc')->limit(5)->get() as $review)
-        <h4>
+        <h5>
             {!! $review->renderRating() !!}
             {!! $review->title !!}
-        </h4>
+        </h5>
         By {!! $review->user->firstName . ' on ' . $review->created_at !!} <br>
         @if($review->user->verifiedInteraction($reviewable))
             Verified Renter
@@ -14,7 +14,6 @@
         </p>
     @endforeach
     @if($reviewable->reviews->count() > 5)
-{{--        {!! link_to_route() !!}--}}
         See More Reviews
     @endif
 @else

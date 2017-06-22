@@ -1,4 +1,4 @@
-<div id="myCarousel" class="carousel col-sm-9 col-xs-12 col-sm-push-3" data-ride="carousel" data-interval="false">
+<div id="myCarousel" class="col-sm-9 col-xs-12 col-sm-push-3" data-ride="carousel" data-interval="false">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         @foreach($product->images()->get() as $image)
@@ -16,8 +16,8 @@
                     <img src="{{ $image->thumbnailUrl }}" style="border:1px solid black;">
                 </a>
                 @if(Auth::user() && Auth::user()->isAdmin())
-                    <button type="button" class="btn btn-link" data-delete-image="{{ $image->id }}">
-                        <i class="fa-close fa" style="margin-top:-10px;"></i>
+                    <button type="button" class="btn-floating btn-flat" data-delete-image="{{ $image->id }}">
+                        X
                     </button>
                 @endif
             </li>

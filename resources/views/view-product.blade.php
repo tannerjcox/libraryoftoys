@@ -83,7 +83,7 @@
                 <div class="col-md-4 pull-right">
                     @if($product->isAvailable() || $preview)
                         {!! BootForm::open()->get()->action('\add-to-cart') !!}
-                        {!! BootForm::button('Add to Cart')->type('submit')->class('btn btn-primary') !!}
+                        <a class="btn btn-large waves-effect waves-light">Rent Now</a>
                         {!! BootForm::close() !!}
                     @endif
                 </div>

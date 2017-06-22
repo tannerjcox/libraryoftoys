@@ -69,7 +69,7 @@
     </script>
 @stop
 @section('content')
-    <div class="panel panel-default">
+    <div class="panel panel-default hoverable">
         <div class="panel-heading">Dashboard - Welcome {{ Auth::user()->name }}</div>
         <div class="panel-body">
             <canvas id="myChart" width="400" height="200"></canvas>

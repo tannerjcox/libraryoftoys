@@ -51,6 +51,13 @@ class UsersController extends Controller
         ]);
     }
 
+    public function adminsJson()
+    {
+        return response()->json([
+            'admins' => User::admins()->get(['name', 'email', 'created_at'])
+        ]);
+    }
+
     /**
      * Edit a user.
      *
@@ -101,9 +108,13 @@ class UsersController extends Controller
     public function update(StoreUserRequest $request, User $user)
     {
         $user->update($request->all());
+        $user->is_admin = $request->is_admin == 'on';
+        $user->save();
 
         return \Redirect::route('users.edit', $user->id)->with([
-            'user' => $user
+            'user' => $user,
+            'success' => true,
+            'message' => 'Success'
         ]);
     }
 }

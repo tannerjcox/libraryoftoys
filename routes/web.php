@@ -27,6 +27,10 @@ Route::group([
     'middleware' => ['admin', 'auth']
 ], function () {
     Route::get('admins', 'UsersController@admins')->name('admins');
+    Route::get('admins.json', 'UsersController@adminsJson')->name('admins.json');
+    Route::get('admins-vue', function() {
+        return view('admin.admins.vue');
+    })->name('admins-vue');
     Route::get('users/{id}/products', 'UsersController@products')->name('users.products');
     Route::resource('users', 'UsersController');
     Route::resource('pages', 'PagesController');

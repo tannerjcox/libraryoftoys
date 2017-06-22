@@ -16,6 +16,7 @@
                     {!! $product->mainThumbnail !!}<br>
                     {{ $product->name }}<br>
                 </a>
+                {!! $product->renderRating !!}
                 {{ formatMoney($product->renderedPrice) }}<br>
             </div>
         @endforeach

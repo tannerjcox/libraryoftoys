@@ -23,14 +23,16 @@
 </head>
 <body>
 @include('partials.header', ['admin' => 0])
-<div id="app" class="main-content container-fluid">
-    <div class="title m-b-md col-xs-12">
-        <a href="/">
-            <img src="{{ asset('images/toytrader_logo.png') }}" class="col-sm-4 col-xs-12">
-        </a>
+<main>
+    <div id="app" class="main-content container-fluid">
+        <div class="title m-b-md col-xs-12">
+            <a href="/">
+                <img src="{{ asset('images/toytrader_logo.png') }}" class="col-sm-4 col-xs-12">
+            </a>
+        </div>
+        @yield('content')
     </div>
-    @yield('content')
-</div>
+</main>
 @include('partials.footer')
 <!-- Scripts -->
 @include('partials.scripts')

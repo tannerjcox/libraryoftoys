@@ -1,9 +1,9 @@
 @if(!Auth::user())
-    <h4>Please Log In to leave a review</h4>
+    <h5>Please Log In to leave a review</h5>
 @elseif(Auth::user()->hasReviewedProduct($product->id))
-    <h4>Thank you for your review!</h4>
+    <h5>Thank you for your review!</h5>
 @else
-    <h4>Leave a Review</h4>
+    <h5>Leave a Review</h5>
     {!! BootForm::open()->post()->action(route('review.store')) !!}
         {!! BootForm::text('Title', 'title') !!}
         {!! BootForm::textArea('Review', 'description')->rows(5) !!}

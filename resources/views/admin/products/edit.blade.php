@@ -5,16 +5,16 @@
     <script>
       $(function () {
         $('[name=title]').keyup(function () {
-          var title = $(this).val()
+          let title = $(this).val()
           $('[name=url]').val(title.replace(/ /g, '-'))
-        });
+        })
         $('.carousel-selector-link').hover(function () {
           $(this).click()
-        });
-      });
+        })
+      })
 
       Dropzone.autoDiscover = false
-      var myDZ = new Dropzone('form.dropzone')
+      let myDZ = new Dropzone('form.dropzone')
       myDZ.on('complete', function (file) {
         path = JSON.parse(file.xhr.response).path
         if ($('[name=images]').val() !== '') {
@@ -22,7 +22,7 @@
         } else {
           $('[name=images]').val(path)
         }
-      });
+      })
     </script>
 @stop
 @section('styles')
@@ -35,7 +35,7 @@
         }
 
         .main-image {
-            height: 350px!important;
+            height: 350px !important;
         }
 
         @media (max-width: 768px) {
@@ -69,14 +69,14 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 input-field">
                     {!! BootForm::text('Name', 'name') !!}
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 input-field">
                     {!! BootForm::text('Price', 'price') !!}
                 </div>
-                <div class="col-md-6">
-                    @if(isset($product))
+                @if(isset($product))
+                    <div class="col-md-6">
                         @if($product->images()->count())
                             @include('partials.product-gallery')
                         @else
@@ -84,21 +84,27 @@
                                 No images
                             </div>
                         @endif
-                    @endif
-                </div>
-                <div class="col-md-2">
-                    {!! BootForm::label('Is Enabled')->class('control-label') !!}
-                    {!! BootForm::radio('Yes', 'is_enabled', 1) !!}
-                    {!! BootForm::radio('No', 'is_enabled', 0) !!}
+                    </div>
+                @endif
+                <div class="col s2">
+                    {!! Form::label('is_enabled', 'Is Enabled') !!}
+                    <p>
+                        <input name="is_enabled" type="radio" id="is_enabled_yes"/>
+                        <label for="is_enabled_yes">Yes</label>
+                    </p>
+                    <p>
+                        <input name="is_enabled" type="radio" id="is_enabled_no"/>
+                        <label for="is_enabled_no">No</label>
+                    </p>
                 </div>
                 @if(Auth::user()->isAdmin())
-                    <div class="col-md-2">
+                    <div class="col-md-2 input-field">
                         {!! BootForm::label('Is Approved')->class('control-label') !!}
                         {!! BootForm::radio('Yes', 'is_approved', 1) !!}
                         {!! BootForm::radio('No', 'is_approved', 0) !!}
                     </div>
                 @endif
-                <div class="col-md-6">
+                <div class="col-md-6 input-field">
                     {!! BootForm::textarea('Description', 'description')->rows(5)->defaultValue(isset($product) ? $product->page_content : '') !!}
                 </div>
             </div>
