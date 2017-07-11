@@ -7,14 +7,7 @@
             integrity="sha256-+kAcWA0klKCshjLIEEFOV51LntaiEdbldotJbI99Bh0=" crossorigin="anonymous"></script>
     <script>
       $(function () {
-        $('.carousel-selector-link').hover(function () {
-          $(this).click()
-        })
-        $('#myCarousel').find('.item').each(function () {
-          $(this).zoom({
-            url: $(this).data('image')
-          })
-        })
+        $('.carousel').carousel();
       })
     </script>
 @stop
@@ -40,18 +33,19 @@
     </style>
 @stop
 @section('content')
-    <div class="col-xs-12">
+    <div class="row">
         @if($preview && !$product->is_enabled)
-            <div class="row">
-                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">
+            <div class="col s8 offset-s2 center-align">
+                <div class="card-panel white-text p-sm red">
                     This is a preview only, this product is not purchasable
                 </div>
             </div>
+        <div class="clearfix"></div>
         @endif
         @if(Auth::user() && (Auth::user()->isAdmin() || Auth::user()->id == $product->user_id))
             <a href="{{ route('products.edit', $product->id) }}">Edit Product</a>
         @endif
-        <div class="col-md-6 col-xs-12">
+        <div class="col m6 product-images">
             @if($product->images()->count())
                 @include('partials.product-gallery')
             @else
@@ -60,9 +54,9 @@
                 </div>
             @endif
         </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="col m6">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col m8">
                     <h6>
                         {{ $product->supplierName }}
                         {{--                {!! $product->user->renderRating !!}--}}
@@ -80,7 +74,7 @@
                     </h4>
                 </div>
 
-                <div class="col-md-4 pull-right">
+                <div class="col m4 pull-right">
                     @if($product->isAvailable() || $preview)
                         {!! BootForm::open()->get()->action('\add-to-cart') !!}
                         <a class="btn btn-large waves-effect waves-light">Rent Now</a>
@@ -90,28 +84,25 @@
             </div>
             <div class="clearfix"></div>
             <div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
-                    <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Reviews</a>
+                <ul class="collapsible" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">description</i>Details</div>
+                        <div class="collapsible-body">
+                            <span>{!! $product->description !!}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">question_answer</i>Reviews</div>
+                        <div class="collapsible-body">
+                            <span>
+                                @include('reviews.show', ['reviewable' => $product])
+                                <div>
+                                    @include('reviews.create')
+                                </div>
+                            </span>
+                        </div>
                     </li>
                 </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active product-description" id="description">
-                        {!! $product->description !!}
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="reviews">
-                        @include('reviews.show', ['reviewable' => $product])
-                        <div>
-                            @include('reviews.create')
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-description">
             </div>
         </div>
     </div>

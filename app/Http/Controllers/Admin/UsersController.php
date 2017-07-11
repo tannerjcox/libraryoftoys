@@ -80,7 +80,7 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'is_admin' => $request->is_admin
+            'is_admin' => $request->is_admin == 'on'
         ]);
 
         return \Redirect::route('users.edit', $user->id)->with([

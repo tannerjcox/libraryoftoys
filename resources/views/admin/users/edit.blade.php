@@ -8,32 +8,32 @@
     @else
         {!! BootForm::open()->post()->action(route('users.store')) !!}
     @endif
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4>
-                @if(isset($user))
-                    Edit {{ $user->name }}
-                @else
-                    Create New User
-                @endif
-            </h4>
-        </div>
-        <div class="panel-body">
-            <div class="col-md-6 input-field">
+    <div class="card large">
+        <div class="card-content">
+            <div class="card-title center-align">
+                <h4>
+                    @if(isset($user))
+                        Edit {{ $user->name }}
+                    @else
+                        Create New User
+                    @endif
+                </h4>
+            </div>
+            <div class="col m6 input-field">
                 {!! BootForm::text('Name', 'name') !!}
             </div>
-            <div class="col-md-6 input-field">
+            <div class="col m6 input-field">
                 {!! BootForm::text('Email', 'email') !!}
             </div>
             @if(!isset($user))
-                <div class="col-md-6 input-field">
+                <div class="col m6 input-field">
                     {!! BootForm::password('Password', 'password') !!}
                 </div>
-                <div class="col-md-6 input-field">
+                <div class="col m6 input-field">
                     {!! BootForm::password('Confirm Password', 'password_confirmation') !!}
                 </div>
             @endif
-            <div class="col-xs-6">
+            <div class="col s6">
                 <label class="control-label">Is Admin</label>
                 <div class="switch">
                     <label>
@@ -45,13 +45,13 @@
                 </div>
             </div>
             @if(isset($user) && $user->products )
-                <div class="col-xs-6">
+                <div class="col s6">
                     {!! link_to_route('users.products', $user->name . '\'s Products', $user->id) !!}
                 </div>
             @endif
 
         </div>
-        <div class="panel-footer text-right">
+        <div class="card-action text-right">
             {!! BootForm::submit()->class('btn btn-success text-right waves-effect waves-light') !!}
         </div>
     </div>

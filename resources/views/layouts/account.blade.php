@@ -23,18 +23,17 @@
     </script>
 </head>
 <body>
-    @include('partials.header')
-<main>
-    <div class="container-fluid admin-container">
+@include('partials.header')
+<div class="container">
+    <div class="row admin-container">
         @include('partials.sidebar')
-        <div class="main-content col-sm-10">
+        <div class="main-content col s12">
             @include('partials.validation')
             @yield('content')
         </div>
     </div>
-</main>
+</div>
 @include('partials.footer')
-
 <!-- Scripts -->
 @include('partials.scripts')
 @yield('scripts')

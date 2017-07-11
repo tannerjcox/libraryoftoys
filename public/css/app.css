@@ -62,6 +62,18 @@ body {
     margin-top: 30px;
 }
 
+.m-b-sm {
+    margin-bottom: 10px;
+}
+
+.m-t-sm {
+    margin-top: 10px;
+}
+
+.p-sm {
+    padding:10px;
+}
+
 .m-b-10 {
     margin-bottom: 10px;
 }
@@ -163,15 +175,4 @@ body {
 
 main {
     flex: 1 0 auto;
-}
-
-/*
-Materialize / Bootstrap overrides
- */
-
-.input-field label {
-    left:15px;
-}
-.btn:hover {
-    color:#fff!important;
 }

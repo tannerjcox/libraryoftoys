@@ -4,18 +4,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
     <script>
       $(function () {
-        $('[name=title]').keyup(function () {
-          let title = $(this).val()
-          $('[name=url]').val(title.replace(/ /g, '-'))
-        })
-        $('.carousel-selector-link').hover(function () {
-          $(this).click()
-        })
+        $('.carousel').carousel()
       })
 
       Dropzone.autoDiscover = false
-      let myDZ = new Dropzone('form.dropzone')
-      myDZ.on('complete', function (file) {
+      let myDropzone = new Dropzone('form.dropzone')
+      myDropzone.on('sending', function (file, xhr, formData) {
+        formData.append('product_id', $('[name=id]').val());
+      })
+      myDropzone.on('complete', function (file) {
         path = JSON.parse(file.xhr.response).path
         if ($('[name=images]').val() !== '') {
           $('[name=images]').val($('[name=images]').val() + ',' + path)
@@ -54,29 +51,29 @@
     @else
         {!! BootForm::open()->post()->action(route('products.store')) !!}
     @endif
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            @if(isset($product))
-                <span class="pull-right">{!! link_to_route('product.show', 'View Product', ['name' => str_slug($product->name), 'id' => $product->id, 'preview' => true], ['target' => '_blank', 'class' => 'btn btn-info']) !!}</span>
-            @endif
-            <h4>
+    <div class="card z-depth-5">
+        <div class="card-content">
+            <div class="card-title">
                 @if(isset($product))
-                    Edit <strong>{{ $product->name }}</strong>
-                @else
-                    Create New Product
+                    <span class="pull-right">{!! link_to_route('product.show', 'View Product', ['name' => str_slug($product->name), 'id' => $product->id, 'preview' => true], ['target' => '_blank', 'class' => 'btn btn-info']) !!}</span>
                 @endif
-            </h4>
-        </div>
-        <div class="panel-body">
+                <h4>
+                    @if(isset($product))
+                        Edit <strong>{{ $product->name }}</strong>
+                    @else
+                        Create New Product
+                    @endif
+                </h4>
+            </div>
             <div class="row">
-                <div class="col-md-8 input-field">
-                    {!! BootForm::text('Name', 'name') !!}
+                <div class="col m8 input-field">
+                    {!! BootForm::text('Name', 'name')->attribute('data-length', 100) !!}
                 </div>
-                <div class="col-md-2 input-field">
+                <div class="col m2 input-field">
                     {!! BootForm::text('Price', 'price') !!}
                 </div>
                 @if(isset($product))
-                    <div class="col-md-6">
+                    <div class="col m6">
                         @if($product->images()->count())
                             @include('partials.product-gallery')
                         @else
@@ -89,33 +86,44 @@
                 <div class="col s2">
                     {!! Form::label('is_enabled', 'Is Enabled') !!}
                     <p>
-                        <input name="is_enabled" type="radio" id="is_enabled_yes"/>
+                        <input name="is_enabled" type="radio" id="is_enabled_yes" {{ isset($product) && $product->is_enabled ? 'checked' : '' }} value="1"/>
                         <label for="is_enabled_yes">Yes</label>
                     </p>
                     <p>
-                        <input name="is_enabled" type="radio" id="is_enabled_no"/>
+                        <input name="is_enabled" type="radio" id="is_enabled_no" {{ isset($product) && !$product->is_enabled ? 'checked' : '' }} value="0"/>
                         <label for="is_enabled_no">No</label>
                     </p>
                 </div>
                 @if(Auth::user()->isAdmin())
-                    <div class="col-md-2 input-field">
-                        {!! BootForm::label('Is Approved')->class('control-label') !!}
-                        {!! BootForm::radio('Yes', 'is_approved', 1) !!}
-                        {!! BootForm::radio('No', 'is_approved', 0) !!}
+                    <div class="col m2">
+                        {!! Form::label('is_approved', 'Is Approved') !!}
+                        <p>
+                            <input name="is_approved" type="radio" id="is_approved_yes" {{ isset($product) && $product->is_approved ? 'checked' : '' }} value="1"/>
+                            <label for="is_approved_yes">Yes</label>
+                        </p>
+                        <p>
+                            <input name="is_approved" type="radio" id="is_approved_no" {{ isset($product) && !$product->is_approved ? 'checked' : '' }} value="0"/>
+                            <label for="is_approved_no">No</label>
+                        </p>
                     </div>
                 @endif
-                <div class="col-md-6 input-field">
-                    {!! BootForm::textarea('Description', 'description')->rows(5)->defaultValue(isset($product) ? $product->page_content : '') !!}
+                <div class="col m6 input-field">
+                    {!! BootForm::textarea('Description', 'description')->rows(5)->class('materialize-textarea') !!}
                 </div>
             </div>
         </div>
-        <div class="panel-footer text-right">
+        <div class="card-action right-align">
             {!! BootForm::hidden('images')->value('') !!}
-            {!! BootForm::submit()->class('btn btn-success text-right') !!}
+            {!! BootForm::submit()->class('btn waves-effect waves-light') !!}
         </div>
     </div>
     {!! BootForm::close() !!}
 
-    {!! BootForm::open()->post()->action(route('images.upload'))->class('dropzone col-md-6')->style("height:300px") !!}
-    {!! BootForm::close() !!}
+    @if(!isset($product))
+        {!! BootForm::open()->post()->action(route('images.upload'))->class('dropzone col m6 card z-depth-3')->style("height:300px") !!}
+        {!! BootForm::close() !!}
+    @else
+        {!! BootForm::open()->post()->action(route('products.upload-images', $product->id))->class('dropzone col m6 card z-depth-3')->attribute('data-product-id', $product->id)->style("height:300px") !!}
+        {!! BootForm::close() !!}
+    @endif
 @stop

@@ -1,4 +1,8 @@
 $(function () {
+  $(".button-collapse").sideNav();
+  $('[data-dismiss-validation-alert]').click(function(){
+    $('[data-validation-alert]').fadeOut('slow');
+  });
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

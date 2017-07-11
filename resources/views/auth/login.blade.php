@@ -3,43 +3,34 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
-                    <div class="panel-body">
+            <div class="col m8 offset-m2">
+                <div class="card medium">
+                    <div class="card-content">
+                        <div class="card-title center-align">Login</div>
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
+                            <div>
+                                <div class="{{ $errors->has('email') ? 'has-error' : '' }} col m6 input-field s12">
+                                    <label for="email" class="col-md-4 control-label">E-Mail Address</label>
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
                                     @if ($errors->has('email'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
+                                <div class="{{ $errors->has('password') ? 'has-error' : '' }} col m6 input-field s12">
+                                    <label for="password" class="col-md-4 control-label">Password</label>
                                     <input id="password" type="password" class="form-control" name="password" required>
-
                                     @if ($errors->has('password'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                     @endif
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                            <div class="row">
+                                <div class="col m6 offset-m4 input-field">
                                     <div class="checkbox">
                                         <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                         <label for="remember">
@@ -48,16 +39,17 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <a onclick="$('form').submit()" class="btn btn-primary waves-effect waves-light">
-                                        Login
-                                    </a>
-                                    <br>
-                                    <a class="btn btn-flat" href="{{ route('password.request') }}">
-                                        Forgot Your Password?
-                                    </a>
+                            <div class="row">
+                                <div class="col m12">
+                                    <div class="center-align">
+                                        <a onclick="$('form').submit()" class="btn btn-primary waves-effect waves-light">
+                                            Login
+                                        </a>
+                                        <br>
+                                        <a class="btn btn-flat" href="{{ route('password.request') }}">
+                                            Forgot Your Password?
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </form>

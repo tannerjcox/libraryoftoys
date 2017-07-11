@@ -17,6 +17,7 @@ Route::group([
     'namespace' => 'Admin',
     'middleware' => ['auth']
 ], function () {
+    Route::post('/products/{id}/upload-images', 'ProductsController@uploadImages')->name('products.upload-images');
     Route::resource('products', 'ProductsController');
 });
 
