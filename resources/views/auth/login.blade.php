@@ -44,9 +44,9 @@
                             <div class="row">
                                 <div class="col m12">
                                     <div class="center-align">
-                                        <a onclick="$('form').submit()" class="btn btn-primary waves-effect waves-light">
+                                        <button onclick="$('form').submit()" class="btn btn-primary waves-effect waves-light">
                                             Login
-                                        </a>
+                                        </button>
                                         <a class="btn btn-flat" href="{{ route('password.request') }}">
                                             Forgot Your Password?
                                         </a>

@@ -53,6 +53,8 @@ Auth::routes();
 //Dashboard Route
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'Controller@index')->name('dashboard');
+    Route::get('/account', 'Controller@account')->name('account');
+    Route::put('/account/update', 'Controller@updateAccount')->name('account.update');
 });
 
 Route::post('/upload-images', 'ImagesController@upload')->name('images.upload');

@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class StoreProductRequest extends FormRequest
+class StoreProductRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +24,7 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required',
             'price' => 'required|numeric',
-            'is_enabled' => 'required'
+            'description' => 'required'
         ];
     }
 }

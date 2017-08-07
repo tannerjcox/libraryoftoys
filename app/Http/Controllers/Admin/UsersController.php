@@ -83,7 +83,7 @@ class UsersController extends Controller
             'is_admin' => $request->is_admin == 'on'
         ]);
 
-        return \Redirect::route('users.edit', $user->id)->with([
+        return redirect()->route('users.edit', $user->id)->with([
             'user' => $user
         ]);
     }
@@ -111,7 +111,7 @@ class UsersController extends Controller
         $user->is_admin = $request->is_admin == 'on';
         $user->save();
 
-        return \Redirect::route('users.edit', $user->id)->with([
+        return redirect()->route('users.edit', $user->id)->with([
             'user' => $user,
             'success' => true,
             'message' => 'Success'

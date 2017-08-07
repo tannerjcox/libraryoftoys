@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="container">
+        @include('partial.validation')
         <div class="row">
             <div class="col m8 offset-m2">
                 <div class="card">
@@ -24,18 +25,17 @@
                                         @endif
                                     </div>
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} col m6 input-field s12">
-                                        <label for="email" class="control-label">E-Mail Address</label>
-
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                        <label for="email" data-error="Invalid">E-Mail Address</label>
+                                        <input id="email" type="email" class="validate" name="email" value="{{ old('email') }}" required>
                                         @if ($errors->has('email'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} col m6 input-field s12">
-                                    <label for="password" class="control-label">Password</label>
+                                    <label for="password" class="validate">Password</label>
                                     <input id="password" type="password" class="form-control" name="password" required>
                                     @if ($errors->has('password'))
                                         <span class="help-block">

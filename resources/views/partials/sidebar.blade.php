@@ -1,4 +1,4 @@
-<ul id="slide-out" class="side-nav right">
+<ul id="slide-out" class="side-nav">
     <li>
         <div class="user-view">
             <div class="background">
@@ -17,8 +17,6 @@
     @endif
     {!! active_link_to_route('products.index', 'Products', [], ['class' => 'waves-effect']) !!}
 </ul>
-<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
     {{--<li><div class="user-view">--}}
     {{--<div class="background">--}}
     {{--<img src="images/office.jpg">--}}

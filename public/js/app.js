@@ -3,6 +3,11 @@ $(function () {
   $('[data-dismiss-validation-alert]').click(function(){
     $('[data-validation-alert]').fadeOut('slow');
   });
+
+  $('input, textarea').keyup(function() {
+    $(this).parent().removeClass('has-error');
+  });
+
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,7 +33,7 @@ $(function () {
       $('[id=carousel-selector-' + id + ']').addClass('selected')
     })
   }
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip({delay: 0});
 
   $('[data-delete-image]').click(function() {
     _fa = $(this).find('i');

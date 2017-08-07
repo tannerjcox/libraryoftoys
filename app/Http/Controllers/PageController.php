@@ -44,7 +44,7 @@ class PageController
 
     public function browse()
     {
-        $products = Input::get('preview') ? Product::all() : Product::available()->get();
+        $products = Input::get('preview') ? Product::all()->paginate(18) : Product::available()->paginate(18);
 
         return view('browse')->with([
             'products' => $products

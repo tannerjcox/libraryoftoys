@@ -1,10 +1,11 @@
 @extends('layouts.account')
 
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading">Vendor Dashboard</div>
-        <div class="panel-body">
-            Welcome {{ Auth::user()->name }}!
+    <div class="card hoverable">
+        <div class="card-content">
+            <div class="card-title">
+                Dashboard - Welcome {{ Auth::user()->name }}
+            </div>
         </div>
     </div>
 @endsection

@@ -54,7 +54,7 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
+        $product = new Product($request->all());
         if (!$product->user_id) {
             $product->user_id = Auth::user()->id;
             $product->save();

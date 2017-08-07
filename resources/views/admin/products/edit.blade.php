@@ -10,7 +10,7 @@
       Dropzone.autoDiscover = false
       let myDropzone = new Dropzone('form.dropzone')
       myDropzone.on('sending', function (file, xhr, formData) {
-        formData.append('product_id', $('[name=id]').val());
+        formData.append('product_id', $('[name=id]').val())
       })
       myDropzone.on('complete', function (file) {
         path = JSON.parse(file.xhr.response).path
@@ -66,7 +66,7 @@
                 </h4>
             </div>
             <div class="row">
-                <div class="col m8 input-field">
+                <div class="col m6 input-field">
                     {!! BootForm::text('Name', 'name')->attribute('data-length', 100) !!}
                 </div>
                 <div class="col m2 input-field">
@@ -83,28 +83,38 @@
                         @endif
                     </div>
                 @endif
-                <div class="col s2">
+                <div class="col s2 {{ $errors->has('is_enabled') ? 'has-error' : '' }}">
                     {!! Form::label('is_enabled', 'Is Enabled') !!}
-                    <p>
-                        <input name="is_enabled" type="radio" id="is_enabled_yes" {{ isset($product) && $product->is_enabled ? 'checked' : '' }} value="1"/>
-                        <label for="is_enabled_yes">Yes</label>
-                    </p>
-                    <p>
-                        <input name="is_enabled" type="radio" id="is_enabled_no" {{ isset($product) && !$product->is_enabled ? 'checked' : '' }} value="0"/>
-                        <label for="is_enabled_no">No</label>
-                    </p>
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" name="is_enabled">
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                    @if ($errors->has('is_enabled'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('is_enabled') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 @if(Auth::user()->isAdmin())
-                    <div class="col m2">
+                    <div class="col s2 {{ $errors->has('is_approved') ? 'has-error' : '' }}">
                         {!! Form::label('is_approved', 'Is Approved') !!}
-                        <p>
-                            <input name="is_approved" type="radio" id="is_approved_yes" {{ isset($product) && $product->is_approved ? 'checked' : '' }} value="1"/>
-                            <label for="is_approved_yes">Yes</label>
-                        </p>
-                        <p>
-                            <input name="is_approved" type="radio" id="is_approved_no" {{ isset($product) && !$product->is_approved ? 'checked' : '' }} value="0"/>
-                            <label for="is_approved_no">No</label>
-                        </p>
+                        <div class="switch">
+                            <label>
+                                No
+                                <input type="checkbox" name="is_approved">
+                                <span class="lever"></span>
+                                Yes
+                            </label>
+                        </div>
+                        @if ($errors->has('is_approved'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('is_approved') }}</strong>
+                        </span>
+                        @endif
                     </div>
                 @endif
                 <div class="col m6 input-field">
