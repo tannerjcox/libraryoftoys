@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -52,5 +53,29 @@ class Controller extends BaseController
         }
 
         return view('vendors.dashboard');
+    }
+
+    public function account()
+    {
+        return view('admin.users.edit',[
+            'user' => auth()->user(),
+            'myAccount' => true
+        ]);
+    }
+
+    public function updateAccount(StoreUserRequest $request)
+    {
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        session()->flash('success', true);
+        session()->flash('message', 'Account Successfully updated!');
+
+        return redirect()->back()->with([
+            'user' => auth()->user(),
+            'myAccount' => true
+        ]);
     }
 }
