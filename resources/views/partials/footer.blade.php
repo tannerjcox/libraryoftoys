@@ -1,4 +1,4 @@
-<footer>
+<footer class="page-footer blue darken-4">
     <div class="container">
         <div class="row">
             <div class="col s3">

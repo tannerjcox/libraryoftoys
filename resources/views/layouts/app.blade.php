@@ -23,9 +23,9 @@
 </head>
 <body>
 @include('partials.header', ['admin' => 0])
-<div id="app">
+<main id="app">
     @yield('content')
-</div>
+</main>
 @include('partials.footer')
 <!-- Scripts -->
 @include('partials.scripts')

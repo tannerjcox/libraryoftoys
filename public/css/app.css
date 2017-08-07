@@ -176,3 +176,22 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height:50px!important;
+    line-height:50px!important;
+}
+
+nav ul a {
+    font-size: 1.3rem!important;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
