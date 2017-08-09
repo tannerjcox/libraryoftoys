@@ -4,15 +4,13 @@
 @stop
 
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Static Pages</h3>
-        </div>
-        <div class="panel-body">
-            <table class="table table-hover table-striped">
+    <div class="card hoverable">
+        <div class="card-content">
+            <h3 class="card-title">Static Pages</h3>
+            <table class="bordered striped">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>ID</th>
                     <th>Title</th>
                     <th>Url</th>
                     <th>Link</th>
@@ -23,7 +21,7 @@
                 @foreach($pages as $page)
                     <tr>
                         <td>
-                            {{ $page->id }}
+                            {{ link_to_route('pages.edit', $page->id, $page->id) }}
                         </td>
                         <td>
                             {{ link_to_route('pages.edit', $page->title, $page->id) }}
@@ -42,7 +40,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="panel-footer text-right">
+        <div class="card-action right-align">
             <a href="{{ route('pages.create') }}" class="btn btn-success">Create Page</a>
         </div>
     </div>

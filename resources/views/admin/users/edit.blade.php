@@ -26,43 +26,32 @@
     <div class="card large">
         <div class="card-content">
             <div class="card-title center-align">
-                <h4>
-                    @if(isset($user))
-                        Edit {{ $user->name }}
-                    @else
-                        Create New User
-                    @endif
-                </h4>
+                @if(isset($user))
+                    Edit {{ $user->name }}
+                @else
+                    Create New User
+                @endif
             </div>
-            <div class="col m6 input-field">
-                {!! BootForm::text('Name', 'name') !!}
-            </div>
-            <div class="col m6 input-field">
-                {!! BootForm::text('Email', 'email') !!}
+            <div class="row">
+                <div class="col m6 input-field">
+                    {!! BootForm::text('Name', 'name') !!}
+                </div>
+                <div class="col m6 input-field">
+                    {!! BootForm::text('Email', 'email') !!}
+                </div>
             </div>
             @if(!isset($user))
-                <div class="col m6 input-field">
-                    {!! BootForm::password('Password', 'password') !!}
-                </div>
-                <div class="col m6 input-field">
-                    {!! BootForm::password('Confirm Password', 'password_confirmation') !!}
-                </div>
-            @endif
-            @if(auth()->user()->isAdmin())
-                <div class="col s6">
-                    <label class="control-label">Is Admin</label>
-                    <div class="switch">
-                        <label>
-                            No
-                            <input type="checkbox" name="is_admin" {{ isset($user) && $user->is_admin ? 'checked' : '' }}>
-                            <span class="lever"></span>
-                            Yes
-                        </label>
+                <div class="row">
+                    <div class="col m6 input-field">
+                        {!! BootForm::password('Password', 'password') !!}
+                    </div>
+                    <div class="col m6 input-field">
+                        {!! BootForm::password('Confirm Password', 'password_confirmation') !!}
                     </div>
                 </div>
             @endif
             @if(isset($myAccount))
-                <div class="update-password {{ !old() || old('password') ? 'hide' : '' }}">
+                <div class="row update-password {{ !old() || old('password') ? 'hide' : '' }}">
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} col m6 input-field s12">
                         <label for="password" class="validate">Change Password</label>
                         <input id="password" type="password" class="form-control" name="password" disabled>
@@ -79,6 +68,19 @@
                     </div>
                 </div>
                 <button data-update-password class="btn waves-effect waves-light blue-grey" type="button">Update Password</button>
+            @endif
+            @if(auth()->user()->isAdmin())
+                <div class="col s6">
+                    <label class="control-label">Is Admin</label>
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" name="is_admin" {{ isset($user) && $user->is_admin ? 'checked' : '' }}>
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                </div>
             @endif
         </div>
         <div class="card-action">

@@ -22,7 +22,7 @@
         ]) !!}
     </script>
 </head>
-<body>
+<body class="grey lighten-3">
 @include('partials.header')
 <main class="container">
     <div class="row admin-container">

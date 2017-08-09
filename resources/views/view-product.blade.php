@@ -7,7 +7,7 @@
             integrity="sha256-+kAcWA0klKCshjLIEEFOV51LntaiEdbldotJbI99Bh0=" crossorigin="anonymous"></script>
     <script>
       $(function () {
-        $('.carousel').carousel();
+        $('.carousel').carousel()
       })
     </script>
 @stop
@@ -40,7 +40,7 @@
                     This is a preview only, this product is not purchasable
                 </div>
             </div>
-        <div class="clearfix"></div>
+            <div class="clearfix"></div>
         @endif
         @if(Auth::user() && (Auth::user()->isAdmin() || Auth::user()->id == $product->user_id))
             <a href="{{ route('products.edit', $product->id) }}">Edit Product</a>
@@ -64,10 +64,10 @@
                     <h3>
                         {{ $product->name }}
                     </h3>
-                    <h4>
+                    <h5>
                         {!! $product->renderRating !!}
                         {!! $product->reviews->count() !!} customer reviews
-                    </h4>
+                    </h5>
                     <hr>
                     <h4 class="pull-left">
                         {{ formatMoney($product->price) }}
@@ -94,12 +94,10 @@
                     <li>
                         <div class="collapsible-header"><i class="material-icons">question_answer</i>Reviews</div>
                         <div class="collapsible-body">
-                            <span>
-                                @include('reviews.show', ['reviewable' => $product])
-                                <div>
-                                    @include('reviews.create')
-                                </div>
-                            </span>
+                            <div>
+                                @include('reviews.create')
+                            </div>
+                            @include('reviews.show', ['reviewable' => $product])
                         </div>
                     </li>
                 </ul>
