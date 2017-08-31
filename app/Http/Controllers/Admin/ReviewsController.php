@@ -21,13 +21,10 @@ class ReviewsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->isAdmin()) {
-            $products = Product::paginate(20);
-        } else {
-            $products = $user->products()->paginate(20);
-        }
-        return view('admin.products.index')->with([
-            'products' => $products,
+        $reviews = Review::paginate(20);
+
+        return view('admin.reviews.index')->with([
+            'reviews' => $reviews,
             'admin' => $user->isAdmin()
         ]);
     }

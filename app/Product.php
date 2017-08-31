@@ -36,7 +36,7 @@ class Product extends BaseModel
 
     public function getRenderRatingAttribute()
     {
-        $stars = '<span data-toggle="tooltip" data-tooltip="' . $this->rating . '" class="rating">';
+        $stars = '<span data-toggle="tooltip" data-tooltip="' . $this->rating . ' of 5" class="rating">';
         for ($i = 1; $i <= 5; $i++) {
             $stars .= '<span class="fa fa-stack">';
             if ($this->rating >= $i) {

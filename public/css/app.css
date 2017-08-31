@@ -172,10 +172,6 @@ footer h5 {
     color: #FC0;
 }
 
-.fa-star-o {
-    color: #999;
-}
-
 body {
     display: flex;
     min-height: 100vh;

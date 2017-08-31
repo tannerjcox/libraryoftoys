@@ -1,28 +1,38 @@
-<table class="table table-hover table-striped">
+<table class="responsive-table striped">
     <thead>
     <tr>
         <th>ID</th>
         <th>Title</th>
+        <th>Rating</th>
         <th>User</th>
+        <th>Product / User</th>
         <th>Created</th>
     </tr>
     </thead>
     <tbody>
-    @foreach($products as $product)
+    @foreach($reviews as $review)
         <tr>
             <td>
-                {{ link_to_route('products.edit', $product->id, $product->id) }}
+                {{ link_to_route('reviews.edit', $review->id, $review->id) }}
             </td>
             <td>
-                <span data-toggle="tooltip" title="Preview Product">
-                    {{ link_to_route('product.show', $product->name, ['name' => $product->url,'id' => $product->id, 'preview' => !$product->isAvailable()], ['target' => '_blank']) }}
-                </span>
+                {!! $review->title !!}
             </td>
             <td>
-                {{ link_to_route('users.edit', $product->user->name, $product->user->id) }}
+                {!! $review->renderRating() . "(" . $review->rating . ")" !!}
             </td>
             <td>
-                {{ prettyDate($product->created_at) }}
+                {{ link_to_route('users.edit', $review->user->name, $review->user->id) }}
+            </td>
+            <td>
+                @if($review->reviewable->email)
+                    {!! link_to_route('users.edit', $review->reviewable->name, $review->reviewable->id) !!}
+                @else
+                    {{ link_to_route('product.show', $review->reviewable->name, ['name' => $review->reviewable->url,'id' => $review->reviewable->id, 'preview' => !$review->reviewable->isAvailable()], ['target' => '_blank']) }}
+                @endif
+            </td>
+            <td>
+                {{ prettyDate($review->created_at) }}
             </td>
         </tr>
     @endforeach

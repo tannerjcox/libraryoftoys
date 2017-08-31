@@ -70,7 +70,7 @@
                 <button data-update-password class="btn waves-effect waves-light blue-grey" type="button">Update Password</button>
             @endif
             @if(auth()->user()->isAdmin())
-                <div class="col s6">
+                <div class="col s3">
                     <label class="control-label">Is Admin</label>
                     <div class="switch">
                         <label>
@@ -80,6 +80,9 @@
                             Yes
                         </label>
                     </div>
+                </div>
+                <div class="col s3">
+                    {!! $user->renderRating . "(" . $user->rating . ")" !!}
                 </div>
             @endif
         </div>

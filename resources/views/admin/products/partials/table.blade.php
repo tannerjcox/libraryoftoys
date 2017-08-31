@@ -14,7 +14,7 @@
                 {{ link_to_route('products.edit', $product->id, $product->id) }}
             </td>
             <td>
-                <span data-toggle="tooltip" title="Preview Product">
+                <span title="Preview Product">
                     {{ link_to_route('product.show', $product->name, ['name' => $product->url,'id' => $product->id, 'preview' => !$product->isAvailable()], ['target' => '_blank']) }}
                 </span>
             </td>

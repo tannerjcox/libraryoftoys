@@ -58,8 +58,8 @@
             <div class="row">
                 <div class="col m8">
                     <h6>
-                        {{ $product->supplierName }}
-                        {{--                {!! $product->user->renderRating !!}--}}
+                        {{ $product->user->name }}
+                        {!! $product->user->renderRating !!}
                     </h6>
                     <h3>
                         {{ $product->name }}

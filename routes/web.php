@@ -35,6 +35,7 @@ Route::group([
     Route::get('users/{id}/products', 'UsersController@products')->name('users.products');
     Route::resource('users', 'UsersController');
     Route::resource('pages', 'PagesController');
+    Route::resource('reviews', 'ReviewsController');
 });
 
 
