@@ -1,12 +1,12 @@
-<ul id="slide-out" class="side-nav">
+<ul id="slide-out" class="side-nav fixed">
     <li>
         <div class="user-view">
             <div class="background">
                 <img src="http://materializecss.com/images/office.jpg">
             </div>
-            <a href="#!user"><img class="circle" src="{{ Auth::user()->image }}"></a>
-            <a href="#!name"><span class="white-text name">{{Auth::user()->name}}</span></a>
-            <a href="#!email"><span class="white-text email">{{Auth::user()->email}}</span></a>
+            <a href="#"><img class="circle" src="{{ Auth::user()->image }}"></a>
+            <a href="#"><span class="white-text name">{{Auth::user()->name}}</span></a>
+            <a href="#"><span class="white-text email">{{Auth::user()->email}}</span></a>
         </div>
     </li>
     {!! active_link_to_route('dashboard', 'Dashboard', [], ['class' => 'waves-effect']) !!}

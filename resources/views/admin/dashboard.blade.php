@@ -5,6 +5,7 @@
     <script>
       var newUsers = {!! $newUsers !!},
         newProducts = {!! $newProducts !!},
+        myProducts = {!! $myProducts !!},
         dates = {!! $dates !!},
         ctx = $('#myChart'),
         data = {
@@ -32,7 +33,18 @@
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgba(255,99,132,1)',
-                lineTension: 0
+                lineTension: 0.3
+              },
+              {
+                label: 'My New Products',
+                data: myProducts,
+                backgroundColor: 'rgba(0,100,0,0.2)',
+                borderColor: 'rgba(0,100,0,1)',
+                pointBackgroundColor: 'rgba(0,100,0,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0,100,0,1)',
+                lineTension: 0.2
               },
               {
                 label: '',

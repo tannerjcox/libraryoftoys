@@ -24,7 +24,7 @@
 </head>
 <body class="grey lighten-3">
 @include('partials.header')
-<main class="container">
+<main>
     <div class="row admin-container">
         @include('partials.sidebar')
         <div class="main-content col s12">
