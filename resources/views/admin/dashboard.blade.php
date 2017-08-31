@@ -5,8 +5,9 @@
     <script>
       var newUsers = {!! $newUsers !!},
         newProducts = {!! $newProducts !!},
+        myProducts = {!! $myProducts !!},
         dates = {!! $dates !!},
-        ctx = $("#myChart"),
+        ctx = $('#myChart'),
         data = {
           type: 'line',
           easing: 'easInOutBounce',
@@ -15,41 +16,52 @@
               {
                 label: 'New Users',
                 data: newUsers,
-                backgroundColor: "rgba(30,99,255,0.2)",
-                borderColor: "rgba(30,99,255,0.7)",
-                pointBackgroundColor: "rgba(30,99,255,1)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgba(30,99,255,1)",
-                lineTension:0
+                backgroundColor: 'rgba(30,99,255,0.2)',
+                borderColor: 'rgba(30,99,255,0.7)',
+                pointBackgroundColor: 'rgba(30,99,255,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(30,99,255,1)',
+                lineTension: 0
               },
               {
                 label: 'New Products',
                 data: newProducts,
-                backgroundColor: "rgba(255,99,132,0.2)",
-                borderColor: "rgba(255,99,132,1)",
-                pointBackgroundColor: "rgba(255,99,132,1)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgba(255,99,132,1)",
-                lineTension:0
+                backgroundColor: 'rgba(255,99,132,0.2)',
+                borderColor: 'rgba(255,99,132,1)',
+                pointBackgroundColor: 'rgba(255,99,132,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255,99,132,1)',
+                lineTension: 0.3
+              },
+              {
+                label: 'My New Products',
+                data: myProducts,
+                backgroundColor: 'rgba(0,100,0,0.2)',
+                borderColor: 'rgba(0,100,0,1)',
+                pointBackgroundColor: 'rgba(0,100,0,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0,100,0,1)',
+                lineTension: 0.2
               },
               {
                 label: '',
                 data: dates,
-                backgroundColor: "rgba(255,99,132,0)",
-                borderColor: "rgba(255,99,132,0)",
-                pointBackgroundColor: "rgba(255,99,132,0)",
-                pointBorderColor: "#fff",
-                pointHoverBackgroundColor: "#fff",
-                pointHoverBorderColor: "rgba(255,99,132,0)",
-                lineTension:0
+                backgroundColor: 'rgba(255,99,132,0)',
+                borderColor: 'rgba(255,99,132,0)',
+                pointBackgroundColor: 'rgba(255,99,132,0)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255,99,132,0)',
+                lineTension: 0
               }
             ]
           },
           options: {
             scales: {
-              yAxes:[{
+              yAxes: [{
                 ticks: {
                   min: 0
                 }
@@ -63,15 +75,17 @@
               }]
             }
           }
-        };
+        }
 
       var myLineChart = new Chart(ctx, data)
     </script>
 @stop
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading">Dashboard - Welcome {{ Auth::user()->name }}</div>
-        <div class="panel-body">
+    <div class="card hoverable">
+        <div class="card-content">
+            <div class="card-title">
+                Dashboard - Welcome {{ Auth::user()->name }}
+            </div>
             <canvas id="myChart" width="400" height="200"></canvas>
         </div>
     </div>

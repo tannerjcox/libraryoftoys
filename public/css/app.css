@@ -5,7 +5,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     font-weight: 100;
-    height: 100vh;
+    /*height: 100vh;*/
     width: 100%;
     margin: 0;
 }
@@ -62,20 +62,35 @@ body {
     margin-top: 30px;
 }
 
+.m-b-sm {
+    margin-bottom: 10px;
+}
+
+.m-t-sm {
+    margin-top: 10px;
+}
+
+.m-sm {
+    margin: 10px;
+}
+
+.p-sm {
+    padding: 10px;
+}
+
 .m-b-10 {
     margin-bottom: 10px;
 }
 
 .main-sidebar, .main-content {
-    padding-top: 65px;
-    min-height: 100%;
+    min-height: 70%;
     z-index: 810;
+    padding-bottom: 10px;
 }
 
 /* footer */
 footer {
-    margin-top: 30px;
-    padding-top: 30px;
+    padding-top: 15px;
     background-color: #303030;
     border-top: 1px solid #ddd;
     color: #e2e2e2;
@@ -86,13 +101,13 @@ footer hr {
     border-bottom: 1px solid #666;
 }
 
-footer a {
+footer a, .navbar a {
     color: #ccc;
     text-decoration: none !important;
 }
 
-footer a:hover {
-    color: #fff;
+footer a:hover, .navbar a:hover {
+    color: #fff !important;
 }
 
 footer h5 {
@@ -104,5 +119,106 @@ footer h5 {
 
 .browse-product img {
     max-width: 100%;
-    height: auto;
+    max-height: 100%;
+}
+
+.browse-product {
+    height: 220px;
+}
+
+.product-description {
+    white-space: pre-line;
+    text-align: justify;
+}
+
+/* Navbar customization */
+.navbar-default .navbar-nav > li > a {
+    line-height: 0;
+    color: #ccc;
+}
+
+.navbar a {
+    text-transform: uppercase;
+}
+
+.navbar {
+    height: 30px;
+    min-height: 30px;
+    border: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.navbar-brand {
+    height: 30px;
+    line-height: 0;
+}
+
+.navbar-default {
+    background-color: #303030;
+    color: #e2e2e2;
+}
+
+.rating .fa-stack {
+    font-size: 8px;
+}
+
+.fa-star + .fa-star-o, .fa-star-half-empty + .fa-star-o {
+    color: #E69500;
+}
+
+.fa-star, .fa-star-half-empty {
+    color: #FC0;
+}
+
+.fa-star-o {
+    color: #999;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    height: 50px !important;
+    line-height: 50px !important;
+}
+
+nav ul a {
+    font-size: 1.3rem !important;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.has-error input, .has-error textarea {
+    border-bottom: 1px solid darkred !important;
+    -webkit-box-shadow: 0 1px 0 0 darkred !important;
+    box-shadow: 0 1px 0 0 darkred !important;
+}
+
+.has-error label, .has-error .help-block {
+    color: darkred !important;
+}
+
+header, main, footer {
+    padding-left: 250px !important;
+}
+
+.side-nav {
+    width: 250px;
 }

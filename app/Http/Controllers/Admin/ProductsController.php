@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\BaseRequest;
 use App\Product;
 use App\User;
 use App\Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -52,7 +54,7 @@ class ProductsController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
+        $product = new Product($request->all());
         if (!$product->user_id) {
             $product->user_id = Auth::user()->id;
             $product->save();
@@ -119,30 +121,52 @@ class ProductsController extends Controller
         ]);
     }
 
+    public function uploadImages(Request $request)
+    {
+        $path = $request->file->store('', 'uploads');
+        $product = Product::find($request->product_id);
+        $order = $product->images->count() ? max($product->images()->pluck('order')->toArray()) + 1 : 0;
+
+        if ($path) {
+            $this->storeImage($path, $order, $product);
+            return response()->json([
+                'success' => 200,
+                'path' => $path
+            ]);
+        } else {
+            return response()->json('error', 400);
+        }
+    }
+
+    private function storeImage($imageName, $order, Product $product)
+    {
+        $extension = \File::extension(public_path("/uploads/{$imageName}"));
+        $newName = "{$product->url}-{$order}.{$extension}";
+        $img = \Intervention\Image\Facades\Image::make(public_path("/uploads/{$imageName}"));
+        $img->save(public_path("images/products/{$newName}"));
+        $img->resize(null, Image::THUMBNAIL_HEIGHT, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path("images/products/thumbs/{$newName}"));
+        $img->resize(null, Image::MEDIUM_HEIGHT, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path("images/products/medium/{$newName}"));
+
+        $path = '/images/products/';
+        $image = new Image($newName);
+        $image->path = $path;
+        $image->name = $newName;
+        $image->order = $order;
+        $product->images()->save($image);
+
+        \File::delete(public_path("/uploads/{$imageName}"));
+    }
+
     private function storeImages(array $imageNames, Product $product)
     {
         $order = $product->images->count() ? max($product->images()->pluck('order')->toArray()) + 1 : 0;
         foreach ($imageNames as $key => $imageName) {
-            $extension = \File::extension(public_path("/uploads/{$imageName}"));
-            $newName = "{$product->url}-{$order}.{$extension}";
-            $img = \Intervention\Image\Facades\Image::make(public_path("/uploads/{$imageName}"));
-            $img->save(public_path("images/products/{$newName}"));
-            $img->resize(null, Image::THUMBNAIL_HEIGHT, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save(public_path("images/products/thumbs/{$newName}"));
-            $img->resize(null, Image::MEDIUM_HEIGHT, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save(public_path("images/products/medium/{$newName}"));
-
-            $path = '/images/products/';
-            $image = new Image($newName);
-            $image->path = $path;
-            $image->name = $newName;
-            $image->order = $order;
-            $product->images()->save($image);
+            $this->storeImage($imageName, $order, $product);
             $order++;
-
-            \File::delete(public_path("/uploads/{$imageName}"));
         }
     }
 

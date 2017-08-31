@@ -22,19 +22,19 @@
         ]) !!}
     </script>
 </head>
-<body>
+<body class="grey lighten-3">
 @include('partials.header')
-<div class="row">
-    <div class="col-lg-12">
+<main>
+    <div class="row admin-container">
         @include('partials.sidebar')
-        <div class="main-content col-sm-10">
+        <div class="main-content col s12">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
             @include('partials.validation')
             @yield('content')
         </div>
     </div>
-</div>
+</main>
 @include('partials.footer')
-
 <!-- Scripts -->
 @include('partials.scripts')
 @yield('scripts')

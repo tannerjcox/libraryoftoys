@@ -1,7 +1,7 @@
-<footer>
+<footer class="page-footer teal darken-4">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3 col-xs-6">
+            <div class="col s3">
                 <h5>
                     Information
                 </h5>
@@ -17,7 +17,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-3 col-xs-6">
+            <div class="col s3">
                 <h5>Customer Service</h5>
                 <ul class="list-unstyled">
                     <li>
@@ -31,7 +31,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-3 col-xs-6">
+            <div class="col s3">
                 <h5>
                     My Account
                 </h5>
@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-sm-3 col-xs-6">
+            <div class="col s3">
                 <h5>
                     Our Partners
                 </h5>

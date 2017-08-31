@@ -9,23 +9,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }} - @yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('images/toytrader.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('images/toytrader2.ico') }}">
     <!-- Styles -->
-    @include('partials.styles')
-    @yield('styles')
+@include('partials.styles')
+@yield('styles')
 
-    <!-- Scripts -->
+<!-- Scripts -->
     <script>
       window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-        ]) !!};
+        ]) !!}
     </script>
 </head>
 <body>
 @include('partials.header', ['admin' => 0])
-<div id="app" class="main-content row">
+<main id="app">
     @yield('content')
-</div>
+</main>
 @include('partials.footer')
 <!-- Scripts -->
 @include('partials.scripts')

@@ -7,14 +7,7 @@
             integrity="sha256-+kAcWA0klKCshjLIEEFOV51LntaiEdbldotJbI99Bh0=" crossorigin="anonymous"></script>
     <script>
       $(function () {
-        $('.carousel-selector-link').hover(function () {
-          $(this).click()
-        })
-        $('#myCarousel').find('.item').each(function () {
-          $(this).zoom({
-            url: $(this).data('image')
-          })
-        })
+        $('.carousel').carousel()
       })
     </script>
 @stop
@@ -27,8 +20,8 @@
         }
 
         .main-image {
-            height: 350px!important;
-            max-width:100%;
+            height: 350px !important;
+            max-width: 100%;
         }
 
         @media (max-width: 768px) {
@@ -40,18 +33,19 @@
     </style>
 @stop
 @section('content')
-    <div class="col-xs-12">
+    <div class="row">
         @if($preview && !$product->is_enabled)
-            <div class="row">
-                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">
+            <div class="col s8 offset-s2 center-align">
+                <div class="card-panel white-text p-sm red">
                     This is a preview only, this product is not purchasable
                 </div>
             </div>
+            <div class="clearfix"></div>
         @endif
         @if(Auth::user() && (Auth::user()->isAdmin() || Auth::user()->id == $product->user_id))
             <a href="{{ route('products.edit', $product->id) }}">Edit Product</a>
         @endif
-        <div class="col-md-6 col-xs-12">
+        <div class="col m6 product-images">
             @if($product->images()->count())
                 @include('partials.product-gallery')
             @else
@@ -60,23 +54,53 @@
                 </div>
             @endif
         </div>
-        <div class="col-md-6 col-xs-12">
-            <h1 class="text-center">
-                {{ $product->name }}
-            </h1>
-            <h3>
-                Price: {{ formatMoney($product->price) }}
-            </h3>
-            <div class="col-xs-6 col-md-3 pull-right">
-                @if($product->isAvailable() || $preview)
-                    {!! BootForm::open()->get()->action('\add-to-cart') !!}
-                    {!! BootForm::select('Quantity', 'quantity', $product->qtyOptionsArray)->select(1) !!}
-                    {!! BootForm::button('Add to Cart')->type('submit')->class('btn btn-primary') !!}
-                    {!! BootForm::close() !!}
-                @endif
+        <div class="col m6">
+            <div class="row">
+                <div class="col m8">
+                    <h6>
+                        {{ $product->supplierName }}
+                        {{--                {!! $product->user->renderRating !!}--}}
+                    </h6>
+                    <h3>
+                        {{ $product->name }}
+                    </h3>
+                    <h5>
+                        {!! $product->renderRating !!}
+                        {!! $product->reviews->count() !!} customer reviews
+                    </h5>
+                    <hr>
+                    <h4 class="pull-left">
+                        {{ formatMoney($product->price) }}
+                    </h4>
+                </div>
+
+                <div class="col m4 pull-right">
+                    @if($product->isAvailable() || $preview)
+                        {!! BootForm::open()->get()->action('\add-to-cart') !!}
+                        <a class="btn btn-large waves-effect waves-light">Rent Now</a>
+                        {!! BootForm::close() !!}
+                    @endif
+                </div>
             </div>
-            <div class="clearfix">
-                {!! $product->description !!}
+            <div class="clearfix"></div>
+            <div>
+                <ul class="collapsible" data-collapsible="expandable">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">description</i>Details</div>
+                        <div class="collapsible-body">
+                            <span>{!! $product->description !!}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">question_answer</i>Reviews</div>
+                        <div class="collapsible-body">
+                            <div>
+                                @include('reviews.create')
+                            </div>
+                            @include('reviews.show', ['reviewable' => $product])
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

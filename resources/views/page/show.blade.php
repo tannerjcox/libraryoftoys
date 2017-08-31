@@ -3,10 +3,10 @@
     {!! $page->title !!}
 @stop
 @section('content')
-    <div class="col-md-10 col-md-offset-1">
-        <h1 class="text-center">
-            {!! $page->title !!}
-        </h1>
+    <h1 class="center-align">
+        {!! $page->title !!}
+    </h1>
+    <div class="container">
         {!! $page->page_content !!}
     </div>
 @stop

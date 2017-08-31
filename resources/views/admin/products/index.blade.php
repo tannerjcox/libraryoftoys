@@ -4,12 +4,12 @@
 @stop
 
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Products</h3>
-        </div>
-        <div class="panel-body">
-            <table class="table table-hover table-striped">
+    <div class="card">
+        <div class="card-content hoverable">
+            <div class="card-title">
+                Products
+            </div>
+            <table class="responsive-table striped">
                 <thead>
                 <tr>
                     <th></th>
@@ -37,10 +37,11 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="right-align">
+                <a href="{{ route('products.create') }}"  class="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
+
+            </div>
         </div>
-        <div class="panel-footer text-right">
-            <a href="{{ route('products.create') }}" class="btn btn-primary">Create Product</a>
-        </div>
+        {!!  $products->links() !!}
     </div>
-    {{ $products->links() }}
 @stop

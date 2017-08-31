@@ -43,6 +43,69 @@ class User extends Authenticatable
         return $this->hasMany('App\Product');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    public function productReservations()
+    {
+        return $this->hasMany('App\ProductReservation');
+    }
+
+    public function rentedProducts()
+    {
+        return Product::whereIn('id', $this->productReservations()->pluck('product_id'));
+    }
+
+    public function reviewed()
+    {
+        return $this->morphMany('App\Review', 'reviewable');
+    }
+
+    public function getRatingAttribute()
+    {
+        return $this->reviews()->get()->avg('rating');
+    }
+
+    public function getRenderRatingAttribute()
+    {
+        $stars = '';
+        for ($i = 1; $i <= 5; $i++) {
+            $stars .= '<i class="fa fa-star' . ($this->rating >= $i ? " gold-star " : "-o") . '"></i>';
+        }
+        return $stars;
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany('App\ProductReservation');
+    }
+
+    public function verifiedInteraction($object)
+    {
+        if ($object->email) {
+            return $this->hasRentedFrom($object);
+        }
+
+        return $this->hasRented($object);
+    }
+
+    public function hasRentedFrom(User $user)
+    {
+        return $this->reservations()->where('user_id', $user->id)->first();
+    }
+
+    public function hasRented(Product $product)
+    {
+        return $this->rentedProducts()->where('products.id', $product->id)->first();
+    }
+
+    public function hasReviewedProduct($id)
+    {
+        return $this->reviews()->where('reviewable_id', $id)->where('reviewable_type', 'App\Product')->count();
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;
@@ -51,5 +114,10 @@ class User extends Authenticatable
     public function scopeAdmins($query)
     {
         return $query->whereIsAdmin(true);
+    }
+
+    public function getFirstNameAttribute()
+    {
+        return explode(' ', $this->name)[0];
     }
 }

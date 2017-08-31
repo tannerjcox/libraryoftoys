@@ -2,7 +2,9 @@
 
 namespace App;
 
-class Image extends BaseModel
+use Illuminate\Database\Eloquent\Model;
+
+class Image extends Model
 {
     /**
      * The attributes that should be considered dates.
