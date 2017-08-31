@@ -214,11 +214,3 @@ main {
 .has-error label, .has-error .help-block {
     color: darkred !important;
 }
-
-header, main, footer {
-    padding-left: 250px !important;
-}
-
-.side-nav {
-    width: 250px;
-}

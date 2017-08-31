@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('images/toytrader.ico') }}">
 
     <!-- Styles -->
-@include('partials.styles')
+@include('partials.styles', ['admin' => true])
 @yield('styles')
 
 <!-- Scripts -->
@@ -28,7 +28,6 @@
     <div class="row admin-container">
         @include('partials.sidebar')
         <div class="main-content col s12">
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
             @include('partials.validation')
             @yield('content')
         </div>

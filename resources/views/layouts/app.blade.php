@@ -11,7 +11,7 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('images/toytrader2.ico') }}">
     <!-- Styles -->
-@include('partials.styles')
+@include('partials.styles', ['admin' => false])
 @yield('styles')
 
 <!-- Scripts -->

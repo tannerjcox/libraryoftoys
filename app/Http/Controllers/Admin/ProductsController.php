@@ -24,9 +24,9 @@ class ProductsController extends Controller
     {
         $user = Auth::user();
         if ($user->isAdmin()) {
-            $products = Product::paginate(20);
+            $products = Product::paginate(15);
         } else {
-            $products = $user->products()->paginate(20);
+            $products = $user->products()->paginate(15);
         }
         return view('admin.products.index')->with([
             'products' => $products,
