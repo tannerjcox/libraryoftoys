@@ -28,7 +28,9 @@ class CreateProductsTable extends Migration
             $table->softDeletes();
         });
 
-        DB::update("ALTER TABLE products AUTO_INCREMENT = 10000;");
+        if(env('APP_ENV') != 'testing') {
+            DB::update("ALTER TABLE products AUTO_INCREMENT = 10000;");
+        }
     }
 
     /**
