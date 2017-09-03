@@ -19,5 +19,5 @@ jobs:
           paths:
             - vendor
       - run: touch storage/testing.sqlite
-#      - run: php artisan migrate --force
+      - run: php artisan migrate --force
       - run: ./vendor/bin/phpunit
