@@ -24,7 +24,16 @@ class StoreProductRequest extends BaseRequest
         return [
             'name' => 'required',
             'price' => 'required|numeric',
-            'description' => 'required'
+            'description' => 'required',
+            'images' => 'sometimes|required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Please provide a :attribute.',
+            'images.required' => 'At least one image is required.',
         ];
     }
 }
