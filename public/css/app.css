@@ -212,8 +212,16 @@ main {
     margin: auto;
 }
 
-.image-blurred-edge {
+.image-blurred-edge.page-404 {
     background-image: url('/images/404.jpg');
+}
+
+.image-blurred-edge.page-503 {
+    background-image: url('/images/503.jpg');
+}
+
+.image-blurred-edge {
+
     background-repeat: no-repeat;
     background-position: center;
     width: 1024px;

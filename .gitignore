@@ -1,12 +1,16 @@
-/node_modules/
 /vendor/
 /.idea/
-/storage/
+storage/
 /public/uploads/
 /public/images/products/
 .env
-composer.phar
-deploy.sh
 .phpstorm.meta.php
 _ide_helper.php
 _ide_helper_models.php
+
+#Production Server Ignore Files
+composer.phar
+deploy.sh
+php.ini
+public/error_log
+public/397F68A4909339DFF9650CAF54D70F5E.txt

@@ -13,5 +13,5 @@
         <a href="{{ route('browse') }}" class="btn waves-effect waves-light purple">Browse products</a>
         <a href="{{ route('home') }}" class="btn waves-effect waves-light blue darken-4">Home</a>
     </div>
-    <div class="image-blurred-edge p-t-md"></div>
+    <div class="image-blurred-edge page-404 p-t-md"></div>
 @stop
