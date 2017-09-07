@@ -24,9 +24,9 @@ class ProductsController extends Controller
     {
         $user = Auth::user();
         if ($user->isAdmin()) {
-            $products = Product::paginate(20);
+            $products = Product::paginate(15);
         } else {
-            $products = $user->products()->paginate(20);
+            $products = $user->products()->paginate(15);
         }
         return view('admin.products.index')->with([
             'products' => $products,
@@ -35,19 +35,20 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new product.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('admin.products.edit')->with([
-            'user' => User::find(Input::get('user_id'))
+            'user' => User::find($request->user_id),
+            'product' => null
         ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created product in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -115,7 +116,7 @@ class ProductsController extends Controller
             $this->storeImages($imageNames, $product);
         }
 
-        return Redirect::route('products.edit', $product->id)->with([
+        return redirect()->route('products.edit', $product->id)->with([
             'success' => true,
             'message' => 'Product successfully updated!'
         ]);

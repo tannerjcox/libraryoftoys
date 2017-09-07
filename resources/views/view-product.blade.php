@@ -8,6 +8,29 @@
     <script>
       $(function () {
         $('.carousel').carousel()
+
+        $('.rating-star').hover(
+          function () {
+            updateStarColor($(this))
+          }, function () {
+            let rating = $('[name=rating]').val()
+            if (!rating) {
+              $(this).addClass('fa-star-o').removeClass('fa-star')
+              $(this).prevAll().addClass('fa-star-o').removeClass('fa-star')
+            } else {
+              updateStarColor($('[data-star=' + rating + ']'))
+            }
+          }
+        ).click(function () {
+          $('[name=rating]').val($(this).data('star'))
+          $(this).nextAll().addClass('fa-star-o').removeClass('fa-star')
+        })
+
+        function updateStarColor ($star) {
+          $star.addClass('fa-star').removeClass('fa-star-o')
+          $star.prevAll().addClass('fa-star').removeClass('fa-star-o')
+          $star.nextAll().addClass('fa-star-o').removeClass('fa-star')
+        }
       })
     </script>
 @stop
@@ -49,17 +72,17 @@
             @if($product->images()->count())
                 @include('partials.product-gallery')
             @else
-                <div>
+                <h3 class="center-align">
                     Images Coming Soon
-                </div>
+                </h3>
             @endif
         </div>
         <div class="col m6">
             <div class="row">
                 <div class="col m8">
                     <h6>
-                        {{ $product->supplierName }}
-                        {{--                {!! $product->user->renderRating !!}--}}
+                        {{ $product->user->name }}
+                        {!! $product->user->renderRating !!}
                     </h6>
                     <h3>
                         {{ $product->name }}
@@ -83,25 +106,58 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <div>
-                <ul class="collapsible" data-collapsible="expandable">
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">description</i>Details</div>
-                        <div class="collapsible-body">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s6">
+                            <a class="active" href="#description"><i class="material-icons">description</i> Description</a>
+                        </li>
+                        <li class="tab col s6">
+                            <a href="#reviews"><i class="material-icons">question_answer</i>Reviews</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="description" class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">Description</div>
                             <span>{!! $product->description !!}</span>
                         </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">question_answer</i>Reviews</div>
-                        <div class="collapsible-body">
+                    </div>
+                </div>
+                <div id="reviews" class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">Description</div>
                             <div>
                                 @include('reviews.create')
                             </div>
                             @include('reviews.show', ['reviewable' => $product])
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    {{--<div>--}}
+    {{--<ul class="collapsible" data-collapsible="expandable">--}}
+    {{--<li>--}}
+    {{--<div class="collapsible-header">Details</div>--}}
+    {{--<div class="collapsible-body">--}}
+    {{--<span>{!! $product->description !!}</span>--}}
+    {{--</div>--}}
+    {{--</li>--}}
+    {{--<li>--}}
+    {{--<div class="collapsible-header">Reviews</div>--}}
+    {{--<div class="collapsible-body">--}}
+    {{--<div>--}}
+    {{--@include('reviews.create')--}}
+    {{--</div>--}}
+    {{--@include('reviews.show', ['reviewable' => $product])--}}
+    {{--</div>--}}
+    {{--</li>--}}
+    {{--</ul>--}}
+    {{--</div>--}}
+    </div>
     </div>
 @stop

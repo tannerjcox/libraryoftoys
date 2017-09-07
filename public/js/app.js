@@ -1,5 +1,11 @@
 $(function () {
-  $(".button-collapse").sideNav();
+  $('[data-activates=slide-out]').sideNav({
+    menuWidth: 250
+  });
+  $('[data-activates=mobile-menu]').sideNav({
+    menuWidth: 250,
+    edge: 'right'
+  })
   $('[data-dismiss-validation-alert]').click(function(){
     $('[data-validation-alert]').fadeOut('slow');
   });

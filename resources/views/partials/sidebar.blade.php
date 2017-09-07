@@ -4,9 +4,13 @@
             <div class="background">
                 <img src="http://materializecss.com/images/office.jpg">
             </div>
-            <a href="#"><img class="circle" src="{{ Auth::user()->image }}"></a>
-            <a href="#"><span class="white-text name">{{Auth::user()->name}}</span></a>
-            <a href="#"><span class="white-text email">{{Auth::user()->email}}</span></a>
+            <a href="{{ route('account') }}">
+                @if(Auth::user()->image)
+                    <img class="circle" src="{{ Auth::user()->image }}">
+                @endif
+                <span class="white-text name">{{Auth::user()->name}}</span>
+                <span class="white-text email">{{Auth::user()->email}}</span>
+            </a>
         </div>
     </li>
     {!! active_link_to_route('dashboard', 'Dashboard', [], ['class' => 'waves-effect']) !!}
@@ -16,6 +20,15 @@
         {!! active_link_to_route('pages.index', 'Pages', [], ['class' => 'waves-effect']) !!}
     @endif
     {!! active_link_to_route('products.index', 'Products', [], ['class' => 'waves-effect']) !!}
+    <hr>
+    <li>
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+            Logout
+        </a>
+    </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
 </ul>
     {{--<li><div class="user-view">--}}
     {{--<div class="background">--}}

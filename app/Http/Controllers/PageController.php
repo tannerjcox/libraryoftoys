@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Page;
 use App\Product;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class PageController
 {
@@ -28,10 +29,10 @@ class PageController
         ]);
     }
 
-    public function product($name, $id)
+    public function product(Request $request, $name, $id)
     {
         $product = Product::find($id);
-        $preview = Input::get('preview');
+        $preview = $request->preview;
         if (!$preview && (!$product || !$product->isAvailable())) {
             return abort(404);
         }

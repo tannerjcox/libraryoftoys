@@ -21,13 +21,10 @@ class ReviewsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->isAdmin()) {
-            $products = Product::paginate(20);
-        } else {
-            $products = $user->products()->paginate(20);
-        }
-        return view('admin.products.index')->with([
-            'products' => $products,
+        $reviews = Review::paginate(20);
+
+        return view('admin.reviews.index')->with([
+            'reviews' => $reviews,
             'admin' => $user->isAdmin()
         ]);
     }
@@ -53,10 +50,10 @@ class ReviewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product $product
+     * @param  \App\Review $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Review $review)
     {
         //
     }
@@ -64,10 +61,10 @@ class ReviewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product $product
+     * @param  \App\Review $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Review $review)
     {
         if(!Auth::user()->isAdmin() && Auth::user()->id != $product->user_id) {
             Redirect::route('admin.products.index')->with([
@@ -75,8 +72,8 @@ class ReviewsController extends Controller
                 'success' => false
                 ]);
         }
-        return view('admin.products.edit', [
-            'product' => $product
+        return view('admin.reviews.edit', [
+            'review' => $review
         ]);
     }
 
@@ -84,57 +81,27 @@ class ReviewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Product $product
+     * @param  \App\Review $review
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(StoreProductRequest $request, Product $product)
+    public function update(Request $request, Review $review)
     {
-        $product->update($request->all());
-        if ($request->images) {
-            $imageNames = explode(',', $request->images);
-            $this->storeImages($imageNames, $product);
-        }
+        $review->update($request->all());
 
-        return Redirect::route('products.edit', $product->id)->with([
+
+        return Redirect::route('reviews.edit', $review->id)->with([
             'success' => true,
             'message' => 'Product successfully updated!'
         ]);
     }
 
-    private function storeImages(array $imageNames, Product $product)
-    {
-        $order = $product->images->count() ? max($product->images()->pluck('order')->toArray()) + 1 : 0;
-        foreach ($imageNames as $key => $imageName) {
-            $extension = \File::extension(public_path("/uploads/{$imageName}"));
-            $newName = "{$product->url}-{$order}.{$extension}";
-            $img = \Intervention\Image\Facades\Image::make(public_path("/uploads/{$imageName}"));
-            $img->save(public_path("images/products/{$newName}"));
-            $img->resize(null, Image::THUMBNAIL_HEIGHT, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save(public_path("images/products/thumbs/{$newName}"));
-            $img->resize(null, Image::MEDIUM_HEIGHT, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save(public_path("images/products/medium/{$newName}"));
-
-            $path = '/images/products/';
-            $image = new Image($newName);
-            $image->path = $path;
-            $image->name = $newName;
-            $image->order = $order;
-            $product->images()->save($image);
-            $order++;
-
-            \File::delete(public_path("/uploads/{$imageName}"));
-        }
-    }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product $product
+     * @param  \App\Review $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Review $review)
     {
         //
     }

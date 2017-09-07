@@ -44,21 +44,39 @@
     </style>
 @stop
 @section('content')
-    @if(isset($product))
-        {!! BootForm::open()->put()->action(route('products.update', $product->id)) !!}
-        {!! BootForm::bind($product) !!}
-        {!! BootForm::hidden('id') !!}
-    @else
-        {!! BootForm::open()->post()->action(route('products.store')) !!}
-    @endif
     <div class="card z-depth-5">
+        <div class="right col m6 p-t-md">
+            @if(!$product)
+                {!! BootForm::open()->post()->action(route('images.upload'))->class('dropzone')->style("height:300px") !!}
+                {!! BootForm::close() !!}
+
+                @if ($errors->has('images'))
+                    <div class="has-error">
+                        <span class="help-block">
+                            <strong>{{ $errors->first('images') }}</strong>
+                        </span>
+                    </div>
+                @endif
+            @else
+                {!! BootForm::open()->post()->action(route('products.upload-images', $product->id))->class('dropzone')->attribute('data-product-id', $product->id)->style("height:300px") !!}
+                {!! BootForm::close() !!}
+            @endif
+        </div>
+        @if($product)
+            {!! BootForm::open()->put()->action(route('products.update', $product->id)) !!}
+            {!! BootForm::bind($product) !!}
+            {!! Form::model($product) !!}
+            {!! BootForm::hidden('id') !!}
+        @else
+            {!! BootForm::open()->post()->action(route('products.store')) !!}
+        @endif
         <div class="card-content">
             <div class="card-title">
-                @if(isset($product))
+                @if($product)
                     <span class="pull-right">{!! link_to_route('product.show', 'View Product', ['name' => str_slug($product->name), 'id' => $product->id, 'preview' => true], ['target' => '_blank', 'class' => 'btn btn-info']) !!}</span>
                 @endif
                 <h4>
-                    @if(isset($product))
+                    @if($product)
                         Edit <strong>{{ $product->name }}</strong>
                     @else
                         Create New Product
@@ -72,7 +90,7 @@
                 <div class="col m2 input-field">
                     {!! BootForm::text('Price', 'price') !!}
                 </div>
-                @if(isset($product))
+                @if($product)
                     <div class="col m6">
                         @if($product->images()->count())
                             @include('partials.product-gallery')
@@ -85,13 +103,11 @@
                 @endif
                 <div class="col s2 {{ $errors->has('is_enabled') ? 'has-error' : '' }}">
                     {!! Form::label('is_enabled', 'Is Enabled') !!}
-                    <div class="switch">
-                        <label>
-                            No
-                            <input type="checkbox" name="is_enabled">
-                            <span class="lever"></span>
-                            Yes
-                        </label>
+                    <div class="row">
+                        <input name="is_enabled" type="radio" id="is_enabled_yes" value="1" {{ $product && $product->is_enabled ? 'checked' : '' }}/>
+                        {!! Form::label('is_enabled_yes', 'Yes') !!}
+                        <input name="is_enabled" type="radio" id="is_enabled_no" value="0" {{ $product && $product->is_enabled ? '' : 'checked'}}/>
+                        {!! Form::label('is_enabled_no', 'No') !!}
                     </div>
                     @if ($errors->has('is_enabled'))
                         <span class="help-block">
@@ -102,13 +118,11 @@
                 @if(Auth::user()->isAdmin())
                     <div class="col s2 {{ $errors->has('is_approved') ? 'has-error' : '' }}">
                         {!! Form::label('is_approved', 'Is Approved') !!}
-                        <div class="switch">
-                            <label>
-                                No
-                                <input type="checkbox" name="is_approved">
-                                <span class="lever"></span>
-                                Yes
-                            </label>
+                        <div class="row">
+                            <input name="is_approved" type="radio" id="is_approved_yes" value="1" {{ $product && $product->is_approved ? 'checked' : '' }}/>
+                            {!! Form::label('is_approved_yes', 'Yes') !!}
+                            <input name="is_approved" type="radio" id="is_approved_no" value="0" {{ $product && $product->is_approved ? '' : 'checked'}}/>
+                            {!! Form::label('is_approved_no', 'No') !!}
                         </div>
                         @if ($errors->has('is_approved'))
                             <span class="help-block">
@@ -123,17 +137,12 @@
             </div>
         </div>
         <div class="card-action right-align">
-            {!! BootForm::hidden('images')->value('') !!}
+            @if(!$product)
+                {!! BootForm::hidden('images')->value('') !!}
+            @endif
             {!! BootForm::submit()->class('btn waves-effect waves-light') !!}
         </div>
+        {!! BootForm::close() !!}
     </div>
-    {!! BootForm::close() !!}
 
-    @if(!isset($product))
-        {!! BootForm::open()->post()->action(route('images.upload'))->class('dropzone col m6 card z-depth-3')->style("height:300px") !!}
-        {!! BootForm::close() !!}
-    @else
-        {!! BootForm::open()->post()->action(route('products.upload-images', $product->id))->class('dropzone col m6 card z-depth-3')->attribute('data-product-id', $product->id)->style("height:300px") !!}
-        {!! BootForm::close() !!}
-    @endif
 @stop

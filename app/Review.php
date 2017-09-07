@@ -20,10 +20,16 @@ class Review extends BaseModel
 
     public function renderRating()
     {
-        $stars = '';
-        for ($i = 0; $i < 5; $i++) {
-            $stars .= '<i class="fa fa-star' . ($this->rating > $i ? " gold-star " : "-o") .  '"></i>';
+        $stars = '<span data-toggle="tooltip" data-tooltip="' . $this->rating . ' of 5" class="rating">';
+        for ($i = 1; $i <= 5; $i++) {
+            $stars .= '<span class="fa fa-stack">';
+            if ($this->rating >= $i) {
+                $stars .= '<i class="fa gold-star fa-star fa-stack-2x"></i>';
+            }
+            $stars .= '<i class="fa gold-star fa-star-o fa-stack-2x"></i>';
+            $stars .= '</span>';
         }
+        $stars .= '</span>';
         return $stars;
     }
 }

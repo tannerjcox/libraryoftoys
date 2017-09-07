@@ -3,8 +3,15 @@
     Page Not Found
 @stop
 @section('content')
-    <h2 class="text-center">Sorry, the page you are looking for cannot be found</h2>
-    <div class="text-center">
-        <a href="{{ route('browse') }}" class="btn btn-info">Browse our products</a>
+    <div class="center-align container">
+        <h3>
+            404 - Page Not Found
+        </h3>
+        <h5>
+            Bummer deal! Go head and browse our available items or return to the home page by clicking one of the fancy buttons below!
+        </h5>
+        <a href="{{ route('browse') }}" class="btn waves-effect waves-light purple">Browse products</a>
+        <a href="{{ route('home') }}" class="btn waves-effect waves-light blue darken-4">Home</a>
     </div>
+    <div class="image-blurred-edge p-t-md"></div>
 @stop

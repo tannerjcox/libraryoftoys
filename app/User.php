@@ -29,6 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dontKeepRevisionOf = [
+        'password', 'remember_token'
+    ];
+
     /**
      * The attributes that should be considered dates.
      *
@@ -65,7 +69,7 @@ class User extends Authenticatable
 
     public function getRatingAttribute()
     {
-        return $this->reviews()->get()->avg('rating');
+        return $this->reviewed()->get()->avg('rating');
     }
 
     public function getRenderRatingAttribute()
