@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container">
-        @include('partial.validation')
+        @include('partials.validation')
         <div class="row">
             <div class="col m8 offset-m2">
                 <div class="card">
