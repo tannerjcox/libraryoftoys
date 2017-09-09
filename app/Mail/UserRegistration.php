@@ -29,8 +29,10 @@ class UserRegistration extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.user-registration', [
-            'userName' => $this->userName
-        ]);
+        return $this->subject('ToyTrader User Registration')
+            ->view('mail.user-registration')
+            ->with([
+                'userName' => $this->userName
+            ]);
     }
 }

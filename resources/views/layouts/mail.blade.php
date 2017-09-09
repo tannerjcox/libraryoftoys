@@ -322,15 +322,6 @@
                 line-height: 100%;
             }
 
-            .apple-link a {
-                color: inherit !important;
-                font-family: inherit !important;
-                font-size: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-                text-decoration: none !important;
-            }
-
             .btn-primary table td:hover {
                 background-color: #34495e !important;
             }
@@ -352,6 +343,7 @@
 
                 <!-- START CENTERED WHITE CONTAINER -->
                 <span class="preheader">@yield('preview', 'Thanks for visiting Toytrader!')</span>
+                <a href="{{ route('home') }}"><img src="https://www.toytrader.us/images/toytrader_logo.png" style="height:25px; padding:10px;"></a>
                 <table class="main">
 
                     <!-- START MAIN CONTENT AREA -->
@@ -361,6 +353,7 @@
                                 <tr>
                                     <td>
                                         @yield('content')
+                                        <p>-The ToyTrader Team</p>
                                     </td>
                                 </tr>
                             </table>
@@ -373,11 +366,6 @@
                 <!-- START FOOTER -->
                 <div class="footer">
                     <table border="0" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td class="content-block">
-                                <span class="apple-link">ToyTrader, Sandy UT 84092</span>
-                            </td>
-                        </tr>
                         <tr>
                             <td class="content-block powered-by">
                                 Powered by <a href="{{ route('home') }}">ToyTrader</a>.

@@ -13,9 +13,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <div style="padding:15px;">
-                                <a href="{{ route('products.create') }}" target="_blank">List A Toy</a>
-                            </div>
+                            <a href="{{ route('products.create') }}" target="_blank">List A Toy</a>
                         </td>
                     </tr>
                     </tbody>
