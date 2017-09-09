@@ -11,6 +11,7 @@
         "adamwathan/bootforms": "^0.8.4",
         "braintree/braintree_php": "^3.23",
         "doctrine/dbal": "^2.5",
+        "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",

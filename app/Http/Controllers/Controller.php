@@ -67,7 +67,7 @@ class Controller extends BaseController
         $user->password = bcrypt($request->password);
         $user->save();
         session()->flash('success', true);
-        session()->flash('message', 'Account Successfully updated!');
+        session()->flash('message', 'Account updated');
 
         return redirect()->back()->with([
             'user' => auth()->user(),
